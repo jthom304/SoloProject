@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://trivbalk4rps"]
+
+[ext_resource type="Script" uid="uid://dvolq3uw2ilvw" path="res://Scripts/PlayerController.cs" id="1_05cut"]
+[ext_resource type="Texture2D" uid="uid://vfyli7cdoo3" path="res://Assets/Art/Spiderstand.png" id="1_23f6c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vmj7y"]
+radius = 9.982446
+
+[node name="PlayerChar" type="CharacterBody2D" unique_id=890270060]
+script = ExtResource("1_05cut")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1070318157]
+texture = ExtResource("1_23f6c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1503268997]
+scale = Vector2(1.12, 1.12)
+shape = SubResource("CircleShape2D_vmj7y")
