@@ -19,12 +19,12 @@ public partial class PlayerController : CharacterBody2D
     [Signal]
     public delegate void StartedJumpEventHandler();
 
-    [Export] 
-    private PlayerAnimationController _animationController;
+    //[Export] 
+    //private PlayerAnimationController _animationController;
 
     public const float UnitsPerMeter = 200; //units of distance
-    public const float JumpVelocity = -25f // 
-    public const float PlayerSpeed = 15f //speed of travel
+    public const float JumpVelocity = -25f; // 
+    public const float PlayerSpeed = 15f; //speed of travel
     public float WebSpeed = 10;
 
     Vector2 StartVelocity = new Vector2();
@@ -37,7 +37,7 @@ public partial class PlayerController : CharacterBody2D
  */
     public override void _Process(double delta)
     {
-        if (Input.IsActionJustPressed("UseItem")
+        if (Input.IsActionJustPressed("UseItem"))
         {
             UseItem();
         }
@@ -52,7 +52,7 @@ public partial class PlayerController : CharacterBody2D
     public override void _PhysicsProcess(double deltaTime)
     {
        HandleMovement(deltaTime);
-        HandleJump();
+       HandleJump();
 
     }
 
@@ -103,7 +103,7 @@ public partial class PlayerController : CharacterBody2D
             //jump action
             if (Input.IsActionJustPressed("Jump") && IsOnFloor())
             {
-                currentVelocity.Y = JumpVelocity * PixelsPerMeter;
+                currentVelocity.Y = JumpVelocity * UnitsPerMeter;
                 EmitSignal(SignalName.StartedJump);
             }
         }
@@ -117,13 +117,13 @@ public partial class PlayerController : CharacterBody2D
    */
     private void UseItem()
     {
-        //get spane location
-        Vector2 spawnLocation = this.GetNode<Node2D>("ProjectileLocation").GlobalPosition;
-        //so projectile shoots in right direction
-        Vector2 projectileVelocity = new Vector2((float)Math.Cos(Rotation), (float)Math.Sin(Rotation)) * UnitsPerMeter * ProjectileSpeed;
-        //set and spawn projectile
-        Node newProjectile = CharProjectile.InitializeObject(spawnLocation, projectileVelocity);
-        this.AddChild(newProjectile);
-        //GD.Print("Shot1");
+        ////get spane location
+        //Vector2 spawnLocation = this.GetNode<Node2D>("ProjectileLocation").GlobalPosition;
+        ////so projectile shoots in right direction
+        //Vector2 projectileVelocity = new Vector2((float)Math.Cos(Rotation), (float)Math.Sin(Rotation)) * UnitsPerMeter * ProjectileSpeed;
+        ////set and spawn projectile
+        //Node newProjectile = CharProjectile.InitializeObject(spawnLocation, projectileVelocity);
+        //this.AddChild(newProjectile);
+        ////GD.Print("Shot1");
     }
 }
