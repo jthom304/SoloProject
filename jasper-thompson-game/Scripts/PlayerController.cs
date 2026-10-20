@@ -1,15 +1,15 @@
-/*
- * Filename: PlayerController.cs
- * Author: Jasper Thompson
- * Major: Game Dev/ Animation
- * Date Created: 10/15/26
- * Last Modified: 10/15/26
- * Due Date: 10/28/26
- * Course: Cpsc 320
- * Professor Name: Prof. Jacklitsch
- * Assignment: Project One - Solo Project
- * Purpose: Handle player movement, animation, and commands
- */
+/*******************************************************************/
+/*Filename: PlayerController.cs
+/ * Author: Jasper Thompson
+/ * Major: Game Dev/ Animation
+/ * Date Created: 10/15/26
+/ * Last Modified: 10/15/26
+/ * Due Date: 10/28/26
+/ * Course: Cpsc 320
+/ * Professor Name: Prof. Jacklitsch
+/ * Assignment: Project One - Solo Project
+/ * Purpose: Handle player movement, animation, and commands
+/*******************************************************************/
 
 using Godot;
 using System;
@@ -26,8 +26,6 @@ public partial class PlayerController : CharacterBody2D
     public const float JumpVelocity = -25f; // 
     public const float PlayerSpeed = 15f; //speed of travel
     public float WebSpeed = 10;
-
-    Vector2 StartVelocity = new Vector2();
 
     /*
      Name: _Process
@@ -64,6 +62,7 @@ public partial class PlayerController : CharacterBody2D
    */
     private void HandleMovement(double deltaTime)
     {
+        Vector2 movementVelocity = new Vector2();
 
         //action map inputs and outcomes
         if (Input.IsActionPressed("MoveBack"))
@@ -93,6 +92,9 @@ public partial class PlayerController : CharacterBody2D
    */
     private void HandleJump()
     {
+        Vector2 previousVelocity = this.Velocity;
+        Vector2 currentVelocity = new Vector2(0, previousVelocity.Y);
+
         if (Input.IsActionJustPressed("JumpUp"))
         {
             //add gravity
@@ -101,7 +103,7 @@ public partial class PlayerController : CharacterBody2D
                 //gravity
             }
             //jump action
-            if (Input.IsActionJustPressed("Jump") && IsOnFloor())
+            if (Input.IsActionJustPressed("JumpUp") && IsOnFloor())
             {
                 currentVelocity.Y = JumpVelocity * UnitsPerMeter;
                 EmitSignal(SignalName.StartedJump);
@@ -117,7 +119,7 @@ public partial class PlayerController : CharacterBody2D
    */
     private void UseItem()
     {
-        ////get spane location
+        ////get spawn location
         //Vector2 spawnLocation = this.GetNode<Node2D>("ProjectileLocation").GlobalPosition;
         ////so projectile shoots in right direction
         //Vector2 projectileVelocity = new Vector2((float)Math.Cos(Rotation), (float)Math.Sin(Rotation)) * UnitsPerMeter * ProjectileSpeed;
@@ -125,5 +127,10 @@ public partial class PlayerController : CharacterBody2D
         //Node newProjectile = CharProjectile.InitializeObject(spawnLocation, projectileVelocity);
         //this.AddChild(newProjectile);
         ////GD.Print("Shot1");
+    }
+
+    private void HandleMouse()
+    {
+        LookAt(GetGlobalMousePosition()); //looking at where the mouse is
     }
 }

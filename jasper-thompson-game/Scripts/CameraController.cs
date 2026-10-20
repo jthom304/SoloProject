@@ -29,7 +29,7 @@ public partial class CameraController : Camera2D
     public override void _Process(double delta)
     {
         Vector2 cameraPosition = this.Position;
-        Vector2 playerPosition = _trackedTarget.Position;
+        Vector2 playerPosition = _trackedObject.Position;
 
         this.Position = playerPosition;
     }
