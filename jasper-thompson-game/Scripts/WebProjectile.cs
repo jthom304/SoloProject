@@ -79,3 +79,4 @@ public partial class WebProjectile : CharacterBody2D
             }
         }
     }
+}

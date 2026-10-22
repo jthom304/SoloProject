@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="JasperThompson_Game"
-run/main_scene="uid://dt7ibt8metdgg"
+run/main_scene="uid://ch2kjoxqjrc4i"
 config/features=PackedStringArray("4.7", "C#", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+LevelLoader="*uid://cwscxjiu8l3ps"
 
 [display]
 
