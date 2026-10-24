@@ -18,6 +18,11 @@ public partial class CameraController : Camera2D
     public override void _Ready()
     {
         ProcessMode = ProcessModeEnum.Always;
+
+        if (_trackedObject == null)
+        {
+            GD.Print("CAMCNTRL: no trackable obj found");
+        }
     }
 
     /*
@@ -28,9 +33,9 @@ public partial class CameraController : Camera2D
     */
     public override void _Process(double delta)
     {
-        Vector2 cameraPosition = this.Position;
-        Vector2 playerPosition = _trackedObject.Position;
-
-        this.Position = playerPosition;
+        if(_trackedObject != null)
+        {
+            GlobalPosition = _trackedObject.GlobalPosition;
+        }
     }
 }

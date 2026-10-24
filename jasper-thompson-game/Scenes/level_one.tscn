@@ -8,23 +8,26 @@
 
 [node name="Level1" type="Node2D" unique_id=1036097707]
 
-[node name="Parallax2D" type="Parallax2D" parent="." unique_id=354296119]
+[node name="ParallaxItems" type="Node2D" parent="." unique_id=1475326969]
+position = Vector2(-281, 399)
+
+[node name="Parallax2D" type="Parallax2D" parent="ParallaxItems" unique_id=354296119]
 scroll_scale = Vector2(0.005, 0.005)
 scroll_offset = Vector2(-284, 402)
 repeat_size = Vector2(320, 0)
 repeat_times = 2
 
-[node name="BgParalax1d" type="Sprite2D" parent="Parallax2D" unique_id=1644240104]
+[node name="BgParalax1d" type="Sprite2D" parent="ParallaxItems/Parallax2D" unique_id=1644240104]
 position = Vector2(606, 122)
 texture = ExtResource("1_sojq8")
 
-[node name="Parallax2D2" type="Parallax2D" parent="." unique_id=1483684319]
+[node name="Parallax2D2" type="Parallax2D" parent="ParallaxItems" unique_id=1483684319]
 scroll_scale = Vector2(0.05, 0.05)
 scroll_offset = Vector2(-281, 399)
 repeat_size = Vector2(320, 0)
 repeat_times = 2
 
-[node name="BgParalax2" type="Sprite2D" parent="Parallax2D2" unique_id=1938505372]
+[node name="BgParalax2" type="Sprite2D" parent="ParallaxItems/Parallax2D2" unique_id=1938505372]
 position = Vector2(603, 125)
 texture = ExtResource("2_hi7j2")
 

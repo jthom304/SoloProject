@@ -23,8 +23,10 @@ public partial class PlayerController : CharacterBody2D
     //private PlayerAnimationController _animationController;
 
     public const float UnitsPerMeter = 200; //units of distance
-    public const float JumpVelocity = -25f; // 
-    public const float PlayerSpeed = 15f; //speed of travel
+    public const float JumpVelocity = -2.5f; // 
+    public const float PlayerSpeed = 1.5f; //speed of travel
+    public const float WorldGravity = 1000; //gravity var
+    public const float FallGravity = 1500; //fall gravity var 
     public float WebSpeed = 10;
 
     /*
@@ -49,9 +51,14 @@ public partial class PlayerController : CharacterBody2D
   */
     public override void _PhysicsProcess(double deltaTime)
     {
-       HandleMovement(deltaTime);
-       HandleJump();
-
+        Vector2 velocityHold = this.Velocity; //grab velocity
+        //apply Velocity to methods
+        velocityHold = HandleMovement(velocityHold);
+        velocityHold = HandleJump(velocityHold, (float)deltaTime);
+        //save var
+        this.Velocity = velocityHold;
+        //move with new velocity
+        MoveAndSlide();
     }
 
     /*
@@ -60,7 +67,7 @@ public partial class PlayerController : CharacterBody2D
        Parameters: doube deltaTime
        Returns: None
    */
-    private void HandleMovement(double deltaTime)
+    private Vector2 HandleMovement(Vector2 currVelocity)
     {
         Vector2 movementVelocity = new Vector2();
 
@@ -80,8 +87,9 @@ public partial class PlayerController : CharacterBody2D
             movementVelocity /= (float)Math.Sqrt((movementVelocity.X * movementVelocity.X) + (movementVelocity.Y * movementVelocity.Y));
         }
 
-        //movement method multipled by distance and time
-        MoveAndCollide(movementVelocity * UnitsPerMeter * (float)deltaTime);
+        //Update velocity and movement multipled by distance, time, and speed
+        currVelocity.X = movementVelocity.X * PlayerSpeed * UnitsPerMeter;
+        return currVelocity;
     }
 
     /*
@@ -90,25 +98,32 @@ public partial class PlayerController : CharacterBody2D
        Parameters: doube deltaTime
        Returns: None
    */
-    private void HandleJump()
+    private Vector2 HandleJump(Vector2 currentVelocity, double deltaTime)
     {
-        Vector2 previousVelocity = this.Velocity;
-        Vector2 currentVelocity = new Vector2(0, previousVelocity.Y);
-
-        if (Input.IsActionJustPressed("JumpUp"))
+        if (!IsOnFloor())
         {
-            //add gravity
-            if (!IsOnFloor())
+            float currentGravity; //placeholder
+            if (currentVelocity.Y > 0) 
             {
-                //gravity
+                currentGravity = FallGravity; //if char is falling move faster
             }
-            //jump action
-            if (Input.IsActionJustPressed("JumpUp") && IsOnFloor())
+            else
             {
-                currentVelocity.Y = JumpVelocity * UnitsPerMeter;
-                EmitSignal(SignalName.StartedJump);
+                currentGravity = WorldGravity; // if jumping move slower than descent
             }
+            currentVelocity.Y += currentGravity * (float)deltaTime;
         }
+        else
+        {
+            currentVelocity.Y = 0;
+        }
+        //Jump Action
+        if (Input.IsActionJustPressed("JumpUp") && IsOnFloor())
+        {
+            currentVelocity.Y += JumpVelocity * UnitsPerMeter;
+            //EmitSignal(SignalName.StartedJump)
+        }
+        return currentVelocity;       
     }
 
     /*
@@ -131,6 +146,6 @@ public partial class PlayerController : CharacterBody2D
 
     private void HandleMouse()
     {
-        LookAt(GetGlobalMousePosition()); //looking at where the mouse is
+        //LookAt(GetGlobalMousePosition()); //looking at where the mouse is
     }
 }
