@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://cw5s42i0u7k4w"]
+
+[ext_resource type="Script" uid="uid://pmf8owon2dim" path="res://Scripts/GameManager.cs" id="1_b6fju"]
+[ext_resource type="Script" uid="uid://sy2enqkudv6l" path="res://Scripts/CameraController.cs" id="2_fiftr"]
+[ext_resource type="PackedScene" uid="uid://trivbalk4rps" path="res://Scenes/player_char.tscn" id="3_1ixah"]
+[ext_resource type="PackedScene" uid="uid://bi5pmuuua8f87" path="res://Scenes/timer_hud.tscn" id="4_rgj8m"]
+[ext_resource type="Script" uid="uid://cwscxjiu8l3ps" path="res://Scripts/LevelLoader.cs" id="5_1ixah"]
+
+[node name="GameScene" type="Node2D" unique_id=1853278241 node_paths=PackedStringArray("_playerController", "_cameraController", "_runTimer")]
+script = ExtResource("1_b6fju")
+_playerController = NodePath("PlayerChar")
+_cameraController = NodePath("Camera2D")
+_runTimer = NodePath("TimerHUD")
+
+[node name="LevelScenes" type="Node2D" parent="." unique_id=670424190]
+
+[node name="PlayerChar" parent="." unique_id=890270060 instance=ExtResource("3_1ixah")]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=488966287 node_paths=PackedStringArray("_trackedObject", "_gameManager")]
+script = ExtResource("2_fiftr")
+_trackedObject = NodePath("../PlayerChar")
+_gameManager = NodePath("..")
+
+[node name="TimerHUD" parent="." unique_id=1868610215 node_paths=PackedStringArray("_gameManager") instance=ExtResource("4_rgj8m")]
+_gameManager = NodePath("..")
+
+[node name="GUI" type="CanvasLayer" parent="." unique_id=1511178923]
+
+[node name="LevelLoader" type="Node2D" parent="." unique_id=1320729142]
+script = ExtResource("5_1ixah")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1068677020]

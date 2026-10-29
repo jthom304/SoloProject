@@ -39,15 +39,8 @@ public partial class MainMenu : Control
    */
     public void StartGame()
     {
-        Visible = false; //hide ui menu
-
-        if(LevelLoader.Instance == null) //check
-        {
-            GD.Print("Level loader instance is null");
-            return;
-        }
+        //Switch scenes
         LevelLoader.Instance.SwitchScene(LevelLoader.Instance.StartLevelScene);
-        //switch the scene to new scene
     }
 
     public void OptionsPressed()

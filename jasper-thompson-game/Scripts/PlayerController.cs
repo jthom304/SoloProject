@@ -22,11 +22,11 @@ public partial class PlayerController : CharacterBody2D
     //[Export] 
     //private PlayerAnimationController _animationController;
 
-    public const float UnitsPerMeter = 200; //units of distance
+    public const float PixelsPerMeter = 200f; //units of distance
     public const float JumpVelocity = -2.5f; // 
-    public const float PlayerSpeed = 1.5f; //speed of travel
-    public const float WorldGravity = 1000; //gravity var
-    public const float FallGravity = 1500; //fall gravity var 
+    public const float PlayerSpeed = 1f; //speed of travel
+    public const float WorldGravity = 5f; //gravity var
+    public const float FallGravity = 7.5f; //fall gravity var 
     public float WebSpeed = 10;
 
     /*
@@ -51,13 +51,13 @@ public partial class PlayerController : CharacterBody2D
   */
     public override void _PhysicsProcess(double deltaTime)
     {
-        Vector2 velocityHold = this.Velocity; //grab velocity
-        //apply Velocity to methods
-        velocityHold = HandleMovement(velocityHold);
-        velocityHold = HandleJump(velocityHold, (float)deltaTime);
-        //save var
-        this.Velocity = velocityHold;
-        //move with new velocity
+        Vector2 movementVelocity = this.Velocity;
+
+        movementVelocity = HandleMovement(movementVelocity);
+
+        movementVelocity = HandleJump(movementVelocity, deltaTime);
+
+        Velocity = movementVelocity;
         MoveAndSlide();
     }
 
@@ -67,29 +67,21 @@ public partial class PlayerController : CharacterBody2D
        Parameters: doube deltaTime
        Returns: None
    */
-    private Vector2 HandleMovement(Vector2 currVelocity)
+    private Vector2 HandleMovement(Vector2 movementVelocity)
     {
-        Vector2 movementVelocity = new Vector2();
+        movementVelocity.X = 0f;
 
         //action map inputs and outcomes
         if (Input.IsActionPressed("MoveBack"))
         {
-            movementVelocity += Vector2.Left;
+            movementVelocity.X -= PlayerSpeed * PixelsPerMeter;
         }
         if (Input.IsActionPressed("MoveForward"))
         {
-            movementVelocity += Vector2.Right;
-        }
-      
-        if (movementVelocity != Vector2.Zero)
-        {
-            //normalized value of velocity movement
-            movementVelocity /= (float)Math.Sqrt((movementVelocity.X * movementVelocity.X) + (movementVelocity.Y * movementVelocity.Y));
+            movementVelocity.X += PlayerSpeed * PixelsPerMeter;
         }
 
-        //Update velocity and movement multipled by distance, time, and speed
-        currVelocity.X = movementVelocity.X * PlayerSpeed * UnitsPerMeter;
-        return currVelocity;
+        return movementVelocity;
     }
 
     /*
@@ -98,32 +90,33 @@ public partial class PlayerController : CharacterBody2D
        Parameters: doube deltaTime
        Returns: None
    */
-    private Vector2 HandleJump(Vector2 currentVelocity, double deltaTime)
+    private Vector2 HandleJump(Vector2 movementVelocity, double deltaTime)
     {
-        if (!IsOnFloor())
+        if (IsOnFloor())
         {
-            float currentGravity; //placeholder
-            if (currentVelocity.Y > 0) 
+            if (movementVelocity.Y > 0)
             {
-                currentGravity = FallGravity; //if char is falling move faster
+                //stop on floor
+                movementVelocity.Y = 0;
             }
-            else
-            {
-                currentGravity = WorldGravity; // if jumping move slower than descent
-            }
-            currentVelocity.Y += currentGravity * (float)deltaTime;
         }
         else
         {
-            currentVelocity.Y = 0;
+            float currentGravity = WorldGravity; //normal gravity
+            if (movementVelocity.Y > 0)
+            {
+                currentGravity = FallGravity; //if char is falling move faster
+            }
+            //converting to pixels
+            movementVelocity.Y += currentGravity * PixelsPerMeter * (float)deltaTime;
         }
         //Jump Action
         if (Input.IsActionJustPressed("JumpUp") && IsOnFloor())
         {
-            currentVelocity.Y += JumpVelocity * UnitsPerMeter;
+            movementVelocity.Y = JumpVelocity * PixelsPerMeter;
             //EmitSignal(SignalName.StartedJump)
-        }
-        return currentVelocity;       
+        }  
+        return movementVelocity;
     }
 
     /*

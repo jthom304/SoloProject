@@ -18,10 +18,14 @@ public partial class LevelLoader : Node
 
     public static LevelLoader Instance { get; private set; }
 
-    public override void _Ready()
+    public override void _EnterTree()
     {
         //set instance
         Instance = this;
+    }
+
+    public override void _Ready()
+    {
         //Start with showing menu
         SwitchScene(MenuScene);
     }
@@ -36,12 +40,12 @@ public partial class LevelLoader : Node
         }
 
         Node newInstance = newScene.Instantiate();
+        AddChild(newInstance); //add scene to the loader
 
         if (currentScene != null)
         {
             currentScene.QueueFree();
         }
-        GetTree().Root.CallDeferred("add_child", newInstance); //an error code told me to use this stated problem of nodes being busy ¯\/(._ .)\/¯
         currentScene = newInstance;
 
     }

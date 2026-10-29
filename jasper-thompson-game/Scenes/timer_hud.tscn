@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://bi5pmuuua8f87"]
+
+[ext_resource type="Script" uid="uid://bioq5u66o0yqe" path="res://Scripts/RunTimer.cs" id="1_lvw3g"]
+
+[node name="TimerHUD" type="Control" unique_id=1868610215 node_paths=PackedStringArray("_timeDisplay", "_timerObj")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_lvw3g")
+_timeDisplay = NodePath("PanelContainer/TextureRect/Label")
+_timerObj = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="." unique_id=541952509]
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=2128737992]
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 50.0
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer" unique_id=1921544995]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/TextureRect" unique_id=1618404578]
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 50.0
+text = " Time: "
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vfyli7cdoo3"
-path="res://.godot/imported/Spiderstand.png-f7205db09459f4d65f397b777446be61.ctex"
+uid="uid://bfp2qyhyt1x4q"
+path="res://.godot/imported/Button.png-675aedc97f32c337a431ff53fb5c3d65.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Art/Spiderstand.png"
-dest_files=["res://.godot/imported/Spiderstand.png-f7205db09459f4d65f397b777446be61.ctex"]
+source_file="res://Assets/Art/Button.png"
+dest_files=["res://.godot/imported/Button.png-675aedc97f32c337a431ff53fb5c3d65.ctex"]
 
 [params]
 
