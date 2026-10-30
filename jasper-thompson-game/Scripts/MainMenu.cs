@@ -24,7 +24,7 @@ public partial class MainMenu : Control
     public override void _Ready()
     {
         //connect buttons to methods
-        _startButton.Pressed += StartGame; //call to start game
+        _startButton.Pressed += OnStartPressed; //call to start game
         _optionsButton.Pressed += OptionsPressed; // call to show options menu
         _creditsButton.Pressed += CreditsPressed; // call to show credits menu
         _exitButton.Pressed += ExitGame; //call to end game
@@ -37,10 +37,11 @@ public partial class MainMenu : Control
        Parameters: None
        Returns: None
    */
-    public void StartGame()
+    private void OnStartPressed()
     {
         //Switch scenes
         LevelLoader.Instance.SwitchScene(LevelLoader.Instance.StartLevelScene);
+        QueueFree();
     }
 
     public void OptionsPressed()

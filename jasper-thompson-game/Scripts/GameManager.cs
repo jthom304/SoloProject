@@ -4,6 +4,12 @@ using System;
 public partial class GameManager : Node2D
 {
     [Export]
+    private LoadManager _loadManger;
+
+    [Export]
+    private Node2D _zoneContainer;
+
+    [Export]
     private PlayerController _playerController;
 
     [Export]
@@ -11,6 +17,10 @@ public partial class GameManager : Node2D
 
     [Export]
     private RunTimer _runTimer;
+
+    //private Mapzone _activeZone;
+
+    private Node2D _spawnPoint;
 
     /*
        Name: CheckTimer
