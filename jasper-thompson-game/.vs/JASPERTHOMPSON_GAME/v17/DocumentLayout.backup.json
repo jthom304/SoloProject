@@ -3,36 +3,68 @@
   "WorkspaceRootPath": "D:\\SoloProject\\jasper-thompson-game\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\SoloProject\\jasper-thompson-game\\Scripts\\MainMenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\MainMenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\SoloProject\\jasper-thompson-game\\Scripts\\PauseMenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\PauseMenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\SoloProject\\jasper-thompson-game\\Scripts\\PlayerController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\PlayerController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\SoloProject\\jasper-thompson-game\\Scripts\\GameManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\GameManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\SoloProject\\jasper-thompson-game\\Scenes\\PauseMenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scenes\\PauseMenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\SoloProject\\jasper-thompson-game\\Scripts\\LevelLoader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\LevelLoader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\SoloProject\\jasper-thompson-game\\Scripts\\CameraZone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\CameraZone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\SoloProject\\jasper-thompson-game\\Scripts\\GlobalVariables.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\GlobalVariables.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\SoloProject\\jasper-thompson-game\\Scripts\\PlayerController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\PlayerController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\SoloProject\\jasper-thompson-game\\Scripts\\MainMenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\MainMenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\SoloProject\\jasper-thompson-game\\Scripts\\LoadManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\LoadManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\SoloProject\\jasper-thompson-game\\Scripts\\GameManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\GameManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\SoloProject\\jasper-thompson-game\\Scripts\\BackgroundLoader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\BackgroundLoader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\SoloProject\\jasper-thompson-game\\Scripts\\LoadingScreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\LoadingScreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\SoloProject\\jasper-thompson-game\\Scripts\\ZonePortal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\ZonePortal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\SoloProject\\jasper-thompson-game\\Scripts\\MapZone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\MapZone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\SoloProject\\jasper-thompson-game\\Scripts\\WebProjectile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\WebProjectile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\SoloProject\\jasper-thompson-game\\Scripts\\CameraController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\CameraController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\SoloProject\\jasper-thompson-game\\Scripts\\RunTimer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\RunTimer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\SoloProject\\jasper-thompson-game\\Scripts\\CameraZone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\CameraZone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\SoloProject\\jasper-thompson-game\\Scripts\\WebProjectile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\WebProjectile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\SoloProject\\jasper-thompson-game\\Scripts\\RunTimer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\RunTimer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,7 +74,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -50,46 +82,151 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
+              "Title": "PauseMenu.cs",
+              "DocumentMoniker": "D:\\SoloProject\\jasper-thompson-game\\Scripts\\PauseMenu.cs",
+              "RelativeDocumentMoniker": "Scripts\\PauseMenu.cs",
+              "ToolTip": "D:\\SoloProject\\jasper-thompson-game\\Scripts\\PauseMenu.cs",
+              "RelativeToolTip": "Scripts\\PauseMenu.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABkAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-31T01:26:09.398Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "GlobalVariables.cs",
+              "DocumentMoniker": "D:\\SoloProject\\jasper-thompson-game\\Scripts\\GlobalVariables.cs",
+              "RelativeDocumentMoniker": "Scripts\\GlobalVariables.cs",
+              "ToolTip": "D:\\SoloProject\\jasper-thompson-game\\Scripts\\GlobalVariables.cs",
+              "RelativeToolTip": "Scripts\\GlobalVariables.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-31T01:16:23.048Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PauseMenu.cs",
+              "DocumentMoniker": "D:\\SoloProject\\jasper-thompson-game\\Scenes\\PauseMenu.cs",
+              "RelativeDocumentMoniker": "Scenes\\PauseMenu.cs",
+              "ToolTip": "D:\\SoloProject\\jasper-thompson-game\\Scenes\\PauseMenu.cs",
+              "RelativeToolTip": "Scenes\\PauseMenu.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-31T00:56:05.474Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "LevelLoader.cs",
+              "DocumentMoniker": "D:\\SoloProject\\jasper-thompson-game\\Scripts\\LevelLoader.cs",
+              "RelativeDocumentMoniker": "Scripts\\LevelLoader.cs",
+              "ToolTip": "D:\\SoloProject\\jasper-thompson-game\\Scripts\\LevelLoader.cs",
+              "RelativeToolTip": "Scripts\\LevelLoader.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAADcAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-30T02:39:08.362Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "MapZone.cs",
+              "DocumentMoniker": "D:\\SoloProject\\jasper-thompson-game\\Scripts\\MapZone.cs",
+              "RelativeDocumentMoniker": "Scripts\\MapZone.cs",
+              "ToolTip": "D:\\SoloProject\\jasper-thompson-game\\Scripts\\MapZone.cs",
+              "RelativeToolTip": "Scripts\\MapZone.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-30T01:17:17.081Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ZonePortal.cs",
+              "DocumentMoniker": "D:\\SoloProject\\jasper-thompson-game\\Scripts\\ZonePortal.cs",
+              "RelativeDocumentMoniker": "Scripts\\ZonePortal.cs",
+              "ToolTip": "D:\\SoloProject\\jasper-thompson-game\\Scripts\\ZonePortal.cs",
+              "RelativeToolTip": "Scripts\\ZonePortal.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-30T01:12:01.914Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "LoadingScreen.cs",
+              "DocumentMoniker": "D:\\SoloProject\\jasper-thompson-game\\Scripts\\LoadingScreen.cs",
+              "RelativeDocumentMoniker": "Scripts\\LoadingScreen.cs",
+              "ToolTip": "D:\\SoloProject\\jasper-thompson-game\\Scripts\\LoadingScreen.cs",
+              "RelativeToolTip": "Scripts\\LoadingScreen.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-30T00:56:05.169Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "LoadManager.cs",
+              "DocumentMoniker": "D:\\SoloProject\\jasper-thompson-game\\Scripts\\LoadManager.cs",
+              "RelativeDocumentMoniker": "Scripts\\LoadManager.cs",
+              "ToolTip": "D:\\SoloProject\\jasper-thompson-game\\Scripts\\LoadManager.cs",
+              "RelativeToolTip": "Scripts\\LoadManager.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAAADIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-30T00:33:30.856Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "BackgroundLoader.cs",
+              "DocumentMoniker": "D:\\SoloProject\\jasper-thompson-game\\Scripts\\BackgroundLoader.cs",
+              "RelativeDocumentMoniker": "Scripts\\BackgroundLoader.cs",
+              "ToolTip": "D:\\SoloProject\\jasper-thompson-game\\Scripts\\BackgroundLoader.cs",
+              "RelativeToolTip": "Scripts\\BackgroundLoader.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-29T23:25:28.118Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
               "Title": "CameraZone.cs",
               "DocumentMoniker": "D:\\SoloProject\\jasper-thompson-game\\Scripts\\CameraZone.cs",
               "RelativeDocumentMoniker": "Scripts\\CameraZone.cs",
               "ToolTip": "D:\\SoloProject\\jasper-thompson-game\\Scripts\\CameraZone.cs",
               "RelativeToolTip": "Scripts\\CameraZone.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAwAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-29T01:07:42.846Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-29T01:07:42.846Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 13,
               "Title": "CameraController.cs",
               "DocumentMoniker": "D:\\SoloProject\\jasper-thompson-game\\Scripts\\CameraController.cs",
               "RelativeDocumentMoniker": "Scripts\\CameraController.cs",
               "ToolTip": "D:\\SoloProject\\jasper-thompson-game\\Scripts\\CameraController.cs",
               "RelativeToolTip": "Scripts\\CameraController.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAwAAAAfAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-28T17:02:29.57Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-28T17:02:29.57Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "PlayerController.cs",
               "DocumentMoniker": "D:\\SoloProject\\jasper-thompson-game\\Scripts\\PlayerController.cs",
               "RelativeDocumentMoniker": "Scripts\\PlayerController.cs",
               "ToolTip": "D:\\SoloProject\\jasper-thompson-game\\Scripts\\PlayerController.cs",
               "RelativeToolTip": "Scripts\\PlayerController.cs",
-              "ViewState": "AgIAAIEAAAAAAAAAAAAAAJAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAACAAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-27T01:17:37.979Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-27T01:17:37.979Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 15,
               "Title": "RunTimer.cs",
               "DocumentMoniker": "D:\\SoloProject\\jasper-thompson-game\\Scripts\\RunTimer.cs",
               "RelativeDocumentMoniker": "Scripts\\RunTimer.cs",
@@ -101,33 +238,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "LevelLoader.cs",
-              "DocumentMoniker": "D:\\SoloProject\\jasper-thompson-game\\Scripts\\LevelLoader.cs",
-              "RelativeDocumentMoniker": "Scripts\\LevelLoader.cs",
-              "ToolTip": "D:\\SoloProject\\jasper-thompson-game\\Scripts\\LevelLoader.cs",
-              "RelativeToolTip": "Scripts\\LevelLoader.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-22T01:30:17.291Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
               "Title": "MainMenu.cs",
               "DocumentMoniker": "D:\\SoloProject\\jasper-thompson-game\\Scripts\\MainMenu.cs",
               "RelativeDocumentMoniker": "Scripts\\MainMenu.cs",
               "ToolTip": "D:\\SoloProject\\jasper-thompson-game\\Scripts\\MainMenu.cs",
               "RelativeToolTip": "Scripts\\MainMenu.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAGAAAAAAAAAAAAAAAA0AAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-22T00:40:46.679Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-22T00:40:46.679Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 12,
               "Title": "WebProjectile.cs",
               "DocumentMoniker": "D:\\SoloProject\\jasper-thompson-game\\Scripts\\WebProjectile.cs",
               "RelativeDocumentMoniker": "Scripts\\WebProjectile.cs",
@@ -139,16 +262,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
               "Title": "GameManager.cs",
               "DocumentMoniker": "D:\\SoloProject\\jasper-thompson-game\\Scripts\\GameManager.cs",
               "RelativeDocumentMoniker": "Scripts\\GameManager.cs",
               "ToolTip": "D:\\SoloProject\\jasper-thompson-game\\Scripts\\GameManager.cs",
               "RelativeToolTip": "Scripts\\GameManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAxwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-19T16:41:45.749Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-19T16:41:45.749Z"
             },
             {
               "$type": "Bookmark",

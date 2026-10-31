@@ -5,13 +5,13 @@ public partial class MainMenu : Control
 {
     //button ref
     [Export]
-    private Button _startButton;
+    private TextureButton _startButton;
     [Export]
-    private Button _optionsButton;
+    private TextureButton _optionsButton;
     [Export]
-    private Button _creditsButton;
+    private TextureButton _creditsButton;
     [Export]
-    private Button _exitButton;
+    private TextureButton _exitButton;
     //[Export]
     //private Button _backButton;
 
@@ -23,7 +23,6 @@ public partial class MainMenu : Control
     */
     public override void _Ready()
     {
-        //connect buttons to methods
         _startButton.Pressed += OnStartPressed; //call to start game
         _optionsButton.Pressed += OptionsPressed; // call to show options menu
         _creditsButton.Pressed += CreditsPressed; // call to show credits menu
@@ -31,37 +30,33 @@ public partial class MainMenu : Control
         //_backButton.Pressed += BackPressed; //call to show main menu and hide others
     }
 
-    /*
-       Name: StartGame
-       Description: hides MainMenu UI element on button press
-       Parameters: None
-       Returns: None
-   */
     private void OnStartPressed()
     {
-        //Switch scenes
+        GD.Print("Start pressed!");
+
+        if (LevelLoader.Instance == null)
+        {
+            GD.PrintErr("LevelLoader Instance is NULL!");
+            return;
+        }
+
+        GD.Print("LevelLoader found!");
+
         LevelLoader.Instance.SwitchScene(LevelLoader.Instance.StartLevelScene);
-        QueueFree();
     }
 
     public void OptionsPressed()
-    { 
-        //optionsMenu.visible = true;
+    {
+        LevelLoader.Instance.SwitchScene(LevelLoader.Instance.SettingsMenu);
     }
 
     public void CreditsPressed()
     {
-        //creditsMenu.visible = true;
+        LevelLoader.Instance.SwitchScene(LevelLoader.Instance.CreditsMenu);
     }
 
     public void ExitGame()
     {
         GetTree().Quit();
-    }
-
-    public void BackPressed()
-    {
-        //optionsMenu.visible = false;
-        //creditsMenu.visible = false;
     }
 }

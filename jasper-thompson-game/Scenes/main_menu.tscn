@@ -1,0 +1,171 @@
+[gd_scene format=3 uid="uid://bi2ffwbc8uxsm"]
+
+[ext_resource type="Script" uid="uid://bjd3fcqoyyb8n" path="res://Scripts/MainMenu.cs" id="1_n45e2"]
+[ext_resource type="Texture2D" uid="uid://cwii0gamvf85d" path="res://Assets/Art/MenuBG.png" id="2_opfnp"]
+[ext_resource type="FontFile" uid="uid://df62akgvq7mrr" path="res://Assets/Fonts/alagard.ttf" id="3_cp0ys"]
+[ext_resource type="Texture2D" uid="uid://bfp2qyhyt1x4q" path="res://Assets/Art/Button.png" id="4_yhxw7"]
+[ext_resource type="FontFile" uid="uid://ctt8dbbodf75b" path="res://Assets/Fonts/PearSoda.ttf" id="5_trj04"]
+
+[node name="MainMenu" type="Control" unique_id=2027262492 node_paths=PackedStringArray("_startButton", "_optionsButton", "_creditsButton", "_exitButton")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_n45e2")
+_startButton = NodePath("StartButton")
+_optionsButton = NodePath("SettingsButton")
+_creditsButton = NodePath("CreditsButton")
+_exitButton = NodePath("ExitButton")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=2136365142]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 280.0
+offset_top = 80.0
+offset_right = 600.0
+offset_bottom = 320.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.675, 1.675)
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer" unique_id=2044173114]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_opfnp")
+
+[node name="Label" type="Label" parent="PanelContainer/TextureRect" unique_id=1367348639]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -85.0
+offset_right = 216.0
+offset_bottom = -51.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.8556017, 0.85055196, 0, 1)
+theme_override_colors/font_outline_color = Color(0.30980393, 0.19215687, 0.03529412, 1)
+theme_override_constants/outline_size = 9
+theme_override_fonts/font = ExtResource("3_cp0ys")
+theme_override_font_sizes/font_size = 26
+text = "Cave Spider: Origins"
+
+[node name="StartButton" type="TextureButton" parent="." unique_id=1996985784]
+layout_mode = 0
+offset_left = 315.2
+offset_top = 190.22502
+offset_right = 635.2
+offset_bottom = 430.22504
+scale = Vector2(0.925, 0.925)
+action_mode = 0
+texture_normal = ExtResource("4_yhxw7")
+
+[node name="Label" type="Label" parent="StartButton" unique_id=223246064]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.312
+anchor_top = 0.326
+anchor_right = 0.665
+anchor_bottom = 0.5
+offset_left = -0.03363037
+offset_top = -7.263077
+offset_right = 1.7848053
+offset_bottom = 2.5849228
+theme_override_colors/font_color = Color(0.85490197, 0.8509804, 0, 1)
+theme_override_fonts/font = ExtResource("5_trj04")
+theme_override_font_sizes/font_size = 55
+text = "Start"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SettingsButton" type="TextureButton" parent="." unique_id=1864744586]
+layout_mode = 0
+offset_left = 551.0
+offset_top = 192.0
+offset_right = 871.0
+offset_bottom = 432.0
+scale = Vector2(0.925, 0.925)
+action_mode = 0
+texture_normal = ExtResource("4_yhxw7")
+
+[node name="Label" type="Label" parent="SettingsButton" unique_id=978072879]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.312
+anchor_top = 0.326
+anchor_right = 0.665
+anchor_bottom = 0.5
+offset_left = -24.898506
+offset_top = -7.263069
+offset_right = 17.141495
+offset_bottom = 3.9769287
+theme_override_colors/font_color = Color(0.85490197, 0.8509804, 0, 1)
+theme_override_fonts/font = ExtResource("5_trj04")
+theme_override_font_sizes/font_size = 48
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CreditsButton" type="TextureButton" parent="." unique_id=735776720]
+layout_mode = 0
+offset_left = 316.00012
+offset_top = 295.00006
+offset_right = 636.0001
+offset_bottom = 535.00006
+scale = Vector2(0.925, 0.925)
+action_mode = 0
+texture_normal = ExtResource("4_yhxw7")
+
+[node name="Label" type="Label" parent="CreditsButton" unique_id=899779118]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.312
+anchor_top = 0.326
+anchor_right = 0.665
+anchor_bottom = 0.5
+offset_left = -16.5969
+offset_top = -6.88871
+offset_right = 8.4431
+offset_bottom = 4.351288
+theme_override_colors/font_color = Color(0.85490197, 0.8509804, 0, 1)
+theme_override_fonts/font = ExtResource("5_trj04")
+theme_override_font_sizes/font_size = 53
+text = "Credits"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExitButton" type="TextureButton" parent="." unique_id=1868357112]
+layout_mode = 0
+offset_left = 550.0
+offset_top = 296.0
+offset_right = 870.0
+offset_bottom = 536.0
+scale = Vector2(0.925, 0.925)
+action_mode = 0
+texture_normal = ExtResource("4_yhxw7")
+
+[node name="Label" type="Label" parent="ExitButton" unique_id=96470162]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.312
+anchor_top = 0.326
+anchor_right = 0.665
+anchor_bottom = 0.5
+offset_left = -0.03363037
+offset_top = -7.263077
+offset_right = 1.7848053
+offset_bottom = 2.5849228
+theme_override_colors/font_color = Color(0.85490197, 0.8509804, 0, 1)
+theme_override_fonts/font = ExtResource("5_trj04")
+theme_override_font_sizes/font_size = 55
+text = "Exit"
+horizontal_alignment = 1
+vertical_alignment = 1
