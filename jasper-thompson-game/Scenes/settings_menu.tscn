@@ -53,6 +53,23 @@ theme_override_fonts/font = ExtResource("2_3etfd")
 theme_override_font_sizes/font_size = 37
 text = "Settings"
 
+[node name="Label2" type="Label" parent="PanelContainer/TextureRect" unique_id=465793930]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.89552
+offset_top = 75.223885
+offset_right = 108.10449
+offset_bottom = 133.73135
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.9137255, 0.18431373, 1)
+theme_override_fonts/font = ExtResource("4_fe37x")
+theme_override_font_sizes/font_size = 17
+text = "How To PLay: 
+Move: <- 'A' 'D' -> Jump: SpaceBar
+Pause: esc PickUp: 'Q' UseItem: 'E'"
+
 [node name="BackButton" type="TextureButton" parent="PanelContainer/TextureRect" unique_id=1147337195]
 layout_mode = 1
 anchors_preset = 8
@@ -60,13 +77,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -112.23881
-offset_top = -8.955231
-offset_right = 207.7612
-offset_bottom = 231.04477
+offset_left = -71.641785
+offset_top = 28.656723
+offset_right = 248.35822
+offset_bottom = 268.65674
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.75, 0.75)
+scale = Vector2(0.485, 0.485)
 action_mode = 0
 texture_normal = ExtResource("3_rahb6")
 
@@ -97,10 +114,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -133.73135
-offset_top = -9.552223
-offset_right = 66.26865
-offset_bottom = 6.447777
+offset_left = -131.34328
+offset_top = 36.41794
+offset_right = 68.65672
+offset_bottom = 52.41794
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.34, 1.34)
@@ -115,10 +132,10 @@ anchor_bottom = 0.5
 offset_left = -27.5
 offset_top = -24.885
 offset_right = 27.5
-offset_bottom = -1.8850002
+offset_bottom = -2.8850002
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 0.9137255, 0.18431373, 1)
 theme_override_fonts/font = ExtResource("4_fe37x")
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 23
 text = "Volume"

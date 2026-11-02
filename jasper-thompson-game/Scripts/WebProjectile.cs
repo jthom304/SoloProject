@@ -23,15 +23,15 @@ public partial class WebProjectile : CharacterBody2D
         Parameters: Vector2 spawnPosition - where it will spawn, Vector2 Velocity - speed var 
         Returns: None
     */
-    //public static WebProjectile InitializeObject(Vector2 spawnPosition, Vector2 initialVelocity)
-    //{
-    //    WebProjectile newProjectile = (CharProjectile)ResourceLoader.Load<PackedScene>("res://Scenes/web_projectile.tscn").Instantiate();
-    //    newProjectile.Position = spawnPosition;
-    //    newProjectile.TopLevel = true;
-    //    //GD.Print("Shot");
-    //    newProjectile.ProjectileVelocity = initialVelocity;
-    //    return newProjectile;
-    //}
+    public static WebProjectile InitializeObject(Vector2 spawnPosition, Vector2 initialVelocity)
+    {
+        WebProjectile newProjectile = (WebProjectile)ResourceLoader.Load<PackedScene>("res://Scenes/web_projectile.tscn").Instantiate();
+        newProjectile.Position = spawnPosition;
+        newProjectile.TopLevel = true;
+        //GD.Print("Shot");
+        newProjectile.ProjectileVelocity = initialVelocity;
+        return newProjectile;
+    }
 
     /*
         Name: _PhysicsProcess
@@ -62,17 +62,14 @@ public partial class WebProjectile : CharacterBody2D
                 // if get collider = BFOF 
                 //if (collidedObj.IsInGroup("Targets"))
                 //{
-                //    //GD.Print("Is Target");
-                //    collidedObj.QueueFree();
                 //    QueueFree();
-
-                //    int targetsLeft = GetTree().GetNodesInGroup("Targets").Count - 1;
-                //    //GD.Print("targets remaining");
-
+                //    BFOFSlowDown(); 
                 //}
                 if (collidedObj.IsInGroup("Wall"))
                 {
                     //GD.Print("Is Wall");
+                    QueueFree();
+                    return;
                 }
                 this.QueueFree();
                 return;

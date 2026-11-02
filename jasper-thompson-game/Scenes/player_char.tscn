@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://6cj3rya2hbnw" path="res://Assets/Sprites/SpiderJump.png" id="3_ckegj"]
 [ext_resource type="Texture2D" uid="uid://byne6nusf3b10" path="res://Assets/Sprites/SpiderRun.png" id="4_n7kft"]
 [ext_resource type="Texture2D" uid="uid://bmvvqkb5e61pj" path="res://Assets/Sprites/SpiderWalk.png" id="5_c768a"]
+[ext_resource type="AudioStream" uid="uid://5jnwoqc2b4wq" path="res://Assets/Music/495117__nebulasnails__wet-splat-2.mp3" id="6_ckegj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ceg8v"]
 atlas = ExtResource("2_4a66o")
@@ -237,7 +238,7 @@ radius = 9.982446
 
 [node name="PlayerChar" type="CharacterBody2D" unique_id=890270060]
 collision_layer = 2
-collision_mask = 5
+collision_mask = 93
 script = ExtResource("1_05cut")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1063021127]
@@ -252,3 +253,9 @@ scale = Vector2(1.12, 1.12)
 shape = SubResource("CircleShape2D_vmj7y")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=883494226]
+
+[node name="ProjectileLocation" type="Node2D" parent="." unique_id=98639792]
+position = Vector2(-26, 0)
+
+[node name="SplatSFX" type="AudioStreamPlayer2D" parent="." unique_id=1064846378]
+stream = ExtResource("6_ckegj")

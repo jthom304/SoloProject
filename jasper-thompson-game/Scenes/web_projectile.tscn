@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://d3ktu2ht6br5a"]
+
+[ext_resource type="Script" uid="uid://cx3alwi321htw" path="res://Scripts/WebProjectile.cs" id="1_dt2to"]
+[ext_resource type="Texture2D" uid="uid://b63c0diih1imw" path="res://Assets/Sprites/WebProjectile.png" id="2_dt2to"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ln5pk"]
+radius = 7.0
+
+[node name="WebProjectile" type="CharacterBody2D" unique_id=629675541]
+collision_layer = 32
+collision_mask = 64
+script = ExtResource("1_dt2to")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1322597072]
+position = Vector2(4, 0)
+texture = ExtResource("2_dt2to")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=749174919]
+position = Vector2(-2, -1)
+shape = SubResource("CircleShape2D_ln5pk")

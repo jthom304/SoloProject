@@ -17,10 +17,13 @@ using System;
 public partial class PlayerController : CharacterBody2D
 {
     [Signal]
+    public delegate void EnteredPortalEventHandler(Area2D cameraZone);
+
+    [Signal]
     public delegate void StartedJumpEventHandler();
 
-    //[Export] 
-    //private PlayerAnimationController _animationController;
+    [Export]
+    private PlayerAnimator _playerAnimator;
 
     public const float PixelsPerMeter = 200f; //units of distance
     public const float JumpVelocity = -2.5f; // 
@@ -28,10 +31,43 @@ public partial class PlayerController : CharacterBody2D
     public const float WorldGravity = 5f; //gravity var
     public const float FallGravity = 7.5f; //fall gravity var 
     public float WebSpeed = 10;
+    private int WebCount = 0;
+
+    private bool CrystalCollected = false;
+
+    private Area2D nearItem = null;
+
+    public override void _Ready()
+    {
+        foreach (Node childItems in GetParent().GetChildren()) //call node above playerchar
+        {
+            if(childItems is Area2D pickupArea)
+            {
+                if(pickupArea.Name == "CrystalItem" || pickupArea.IsInGroup("WebItem"))
+                {
+                    pickupArea.BodyEntered += (body) => //10/30/26 taken from
+                    {
+                        if (body == this)
+                        {
+                            nearItem = pickupArea;
+                        }
+                    };
+
+                    pickupArea.BodyExited += (body) =>
+                    {
+                        if (body == this && nearItem == pickupArea)
+                        {
+                            nearItem = null;
+                        }
+                    };
+                }
+            }
+        }
+    }
 
     /*
      Name: _Process
-     Description: check for action to shoot projectile
+     Description: check for action to shoot projectile or pick up item
      Parameters: doube delta
      Returns: None
  */
@@ -41,6 +77,12 @@ public partial class PlayerController : CharacterBody2D
         {
             UseItem();
         }
+
+        if (Input.IsActionJustPressed("PickUp") && nearItem != null)
+        {
+            PickUp();
+        }
+
     }
 
     /*
@@ -69,16 +111,19 @@ public partial class PlayerController : CharacterBody2D
    */
     private Vector2 HandleMovement(Vector2 movementVelocity)
     {
+        //play idle animation;
         movementVelocity.X = 0f;
 
         //action map inputs and outcomes
         if (Input.IsActionPressed("MoveBack"))
         {
             movementVelocity.X -= PlayerSpeed * PixelsPerMeter;
+            //move left animation
         }
         if (Input.IsActionPressed("MoveForward"))
         {
             movementVelocity.X += PlayerSpeed * PixelsPerMeter;
+            //move right animation
         }
 
         return movementVelocity;
@@ -114,8 +159,13 @@ public partial class PlayerController : CharacterBody2D
         if (Input.IsActionJustPressed("JumpUp") && IsOnFloor())
         {
             movementVelocity.Y = JumpVelocity * PixelsPerMeter;
-            //EmitSignal(SignalName.StartedJump)
+            
         }  
+
+        if(CrystalCollected == true)
+        {
+            EmitSignal(SignalName.StartedJump);
+        }
         return movementVelocity;
     }
 
@@ -127,18 +177,46 @@ public partial class PlayerController : CharacterBody2D
    */
     private void UseItem()
     {
-        ////get spawn location
-        //Vector2 spawnLocation = this.GetNode<Node2D>("ProjectileLocation").GlobalPosition;
-        ////so projectile shoots in right direction
-        //Vector2 projectileVelocity = new Vector2((float)Math.Cos(Rotation), (float)Math.Sin(Rotation)) * UnitsPerMeter * ProjectileSpeed;
-        ////set and spawn projectile
-        //Node newProjectile = CharProjectile.InitializeObject(spawnLocation, projectileVelocity);
-        //this.AddChild(newProjectile);
-        ////GD.Print("Shot1");
+        if (WebCount > 0)
+        {
+            GetNode<AudioStreamPlayer2D>("SplatSFX").Play();
+            //get spawn location
+            Vector2 spawnLocation = this.GetNode<Node2D>("ProjectileLocation").GlobalPosition;
+            //so projectile shoots in right direction
+            Vector2 projectileVelocity = new Vector2((float)Math.Cos(Rotation), (float)Math.Sin(Rotation)) * PixelsPerMeter * WebSpeed;
+            //set and spawn projectile
+            Node newProjectile = WebProjectile.InitializeObject(spawnLocation, projectileVelocity);
+            this.AddChild(newProjectile);
+            WebCount--;
+            //GD.Print("Shot1");
+        }
     }
 
     private void HandleMouse()
     {
-        //LookAt(GetGlobalMousePosition()); //looking at where the mouse is
+        LookAt(GetGlobalMousePosition()); //looking at where the mouse is
+    }
+
+    private void PickUp()
+    {
+        if (nearItem == null)
+        {
+            return;
+        }
+
+        if(nearItem.Name == "CrystalItem")
+        {
+            CrystalCollected = true;
+            nearItem.QueueFree();
+            //switch animation to coin run
+            //trigger BFOF spawn
+        }
+        else if (nearItem.IsInGroup("WebItem"))
+        {
+            WebCount++;
+            nearItem.QueueFree();
+        }
+
+        nearItem = null;
     }
 }

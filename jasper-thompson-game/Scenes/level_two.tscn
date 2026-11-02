@@ -7,8 +7,10 @@
 [ext_resource type="TileSet" uid="uid://oh8rd5qf4idf" path="res://Assets/Art/tileSet.tres" id="3_8jpcs"]
 [ext_resource type="PackedScene" uid="uid://bi5pmuuua8f87" path="res://Scenes/timer_hud.tscn" id="5_8jpcs"]
 [ext_resource type="Script" uid="uid://chx7pkrmdp563" path="res://Scripts/ZonePortal.cs" id="7_ye0dk"]
+[ext_resource type="PackedScene" uid="uid://4q4fpagdr67y" path="res://Scenes/web_item.tscn" id="8_t1jg6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vmj7y"]
+size = Vector2(7.564392, 10.227499)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t1jg6"]
 
@@ -16,14 +18,16 @@
 script = ExtResource("1_7ycwu")
 CameraZone = NodePath("CameraZone")
 zoneBoundary = NodePath("CameraZone")
-ZonePortals = []
+ZonePortals = [NodePath("Portals/LeftPortal"), NodePath("Portals/RightPortal")]
 
 [node name="CameraZone" type="Area2D" parent="." unique_id=1695185710]
-position = Vector2(6111.465, 500)
+position = Vector2(2826, -2448)
 scale = Vector2(1309.16, 600)
 script = ExtResource("1_hwt33")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraZone" unique_id=203417360]
+position = Vector2(-0.012603521, 0.07958317)
+scale = Vector2(1, 1.0000002)
 shape = SubResource("RectangleShape2D_vmj7y")
 
 [node name="ParallaxItems" type="Node2D" parent="." unique_id=965898509]
@@ -153,31 +157,46 @@ tile_set = ExtResource("3_8jpcs")
 [node name="Portals" type="Node2D" parent="." unique_id=363131143]
 
 [node name="LeftPortal" type="Node2D" parent="Portals" unique_id=1478214900 node_paths=PackedStringArray("LoadZone", "SpawnPoint")]
+position = Vector2(-1, 544)
 script = ExtResource("7_ye0dk")
 LoadZone = NodePath("Area2D")
 SpawnPoint = NodePath("SpawnLocation")
 
 [node name="Area2D" type="Area2D" parent="Portals/LeftPortal" unique_id=1235329804]
+position = Vector2(-1, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Portals/LeftPortal/Area2D" unique_id=515330254]
-position = Vector2(-21.15, 520)
+position = Vector2(1, 6.1035156e-05)
 scale = Vector2(1.14, 1.93)
 shape = SubResource("RectangleShape2D_t1jg6")
 
 [node name="SpawnLocation" type="Node2D" parent="Portals/LeftPortal" unique_id=453476489]
+position = Vector2(0, -1)
 
 [node name="RightPortal" type="Node2D" parent="Portals" unique_id=1799534654 node_paths=PackedStringArray("LoadZone", "SpawnPoint")]
-position = Vector2(2000, 2000)
+position = Vector2(7814, -1055)
 script = ExtResource("7_ye0dk")
-ConnectedScene = "res://Scenes/level_two.tscn"
 LoadZone = NodePath("Area2D")
 SpawnPoint = NodePath("SpawnLocation")
 
 [node name="Area2D" type="Area2D" parent="Portals/RightPortal" unique_id=1316686812]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Portals/RightPortal/Area2D" unique_id=46240436]
-position = Vector2(850, 617.585)
 scale = Vector2(1.14, 1.93)
 shape = SubResource("RectangleShape2D_t1jg6")
 
 [node name="SpawnLocation" type="Node2D" parent="Portals/RightPortal" unique_id=820081210]
+
+[node name="WebItems" type="Node2D" parent="." unique_id=63977942]
+
+[node name="WebItem" parent="WebItems" unique_id=432995565 groups=["WebItem"] instance=ExtResource("8_t1jg6")]
+position = Vector2(294, 484)
+
+[node name="WebItem2" parent="WebItems" unique_id=183131249 groups=["WebItem"] instance=ExtResource("8_t1jg6")]
+position = Vector2(1095, 227)
+
+[node name="WebItem3" parent="WebItems" unique_id=1863114319 groups=["WebItem"] instance=ExtResource("8_t1jg6")]
+position = Vector2(565, -191)
+
+[node name="WebItem4" parent="WebItems" unique_id=1315122555 groups=["WebItem"] instance=ExtResource("8_t1jg6")]
+position = Vector2(1821, -1005)
