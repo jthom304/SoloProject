@@ -67,8 +67,6 @@ public partial class LevelLoader : Node
         //listen for completion
         _loadManager.LoadedLevel += OnLevelLoaded;
 
-        //Start with showing menu
-        //SwitchScene(MenuScene);
     }
 
     public void SwitchScene(string scenePath)
@@ -90,9 +88,22 @@ public partial class LevelLoader : Node
         GD.Print("Loading scene: " + packedScene.ResourcePath);
         Node newInstance = packedScene.Instantiate();
 
+        //add new level first
         sceneContainer.AddChild(newInstance);
 
-        if(CurrentScene != null)
+        //find player and keep it from being destroyed by level load
+        if (packedScene.ResourcePath == StartLevelScene)
+        {
+            GameManagerRef.FindPlayer(newInstance);
+        }
+
+        //move player to level 2
+        if(packedScene.ResourcePath == GameLevelScene)
+        {
+            GameManagerRef.MovePlayer(newInstance);
+        }
+
+        if (CurrentScene != null)
         {
             GD.Print("Removing old scene: " + CurrentScene.Name);
             CurrentScene.QueueFree();
@@ -100,5 +111,6 @@ public partial class LevelLoader : Node
 
         CurrentScene = newInstance;
         GD.Print("New scene added: " + CurrentScene.Name);
+
     }
 }

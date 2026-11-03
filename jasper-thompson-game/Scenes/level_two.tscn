@@ -157,21 +157,22 @@ tile_set = ExtResource("3_8jpcs")
 [node name="Portals" type="Node2D" parent="." unique_id=363131143]
 
 [node name="LeftPortal" type="Node2D" parent="Portals" unique_id=1478214900 node_paths=PackedStringArray("LoadZone", "SpawnPoint")]
-position = Vector2(-1, 544)
+position = Vector2(-14, 544)
 script = ExtResource("7_ye0dk")
 LoadZone = NodePath("Area2D")
 SpawnPoint = NodePath("SpawnLocation")
 
 [node name="Area2D" type="Area2D" parent="Portals/LeftPortal" unique_id=1235329804]
-position = Vector2(-1, 0)
+collision_layer = 0
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Portals/LeftPortal/Area2D" unique_id=515330254]
-position = Vector2(1, 6.1035156e-05)
+position = Vector2(9.536743e-07, 5.9604645e-08)
 scale = Vector2(1.14, 1.93)
 shape = SubResource("RectangleShape2D_t1jg6")
 
 [node name="SpawnLocation" type="Node2D" parent="Portals/LeftPortal" unique_id=453476489]
-position = Vector2(0, -1)
+position = Vector2(42, 14)
 
 [node name="RightPortal" type="Node2D" parent="Portals" unique_id=1799534654 node_paths=PackedStringArray("LoadZone", "SpawnPoint")]
 position = Vector2(7814, -1055)
@@ -180,6 +181,8 @@ LoadZone = NodePath("Area2D")
 SpawnPoint = NodePath("SpawnLocation")
 
 [node name="Area2D" type="Area2D" parent="Portals/RightPortal" unique_id=1316686812]
+collision_layer = 4
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Portals/RightPortal/Area2D" unique_id=46240436]
 scale = Vector2(1.14, 1.93)

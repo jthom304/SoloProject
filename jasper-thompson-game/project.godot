@@ -69,6 +69,7 @@ PickUp={
 
 2d_physics/layer_1="WalkableTiles"
 2d_physics/layer_2="character"
+2d_physics/layer_3="portals"
 2d_physics/layer_4="crystal"
 2d_physics/layer_5="webitem"
 2d_physics/layer_6="projectile"

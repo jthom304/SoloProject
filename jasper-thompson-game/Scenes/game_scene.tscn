@@ -4,14 +4,16 @@
 [ext_resource type="Script" uid="uid://cwscxjiu8l3ps" path="res://Scripts/LevelLoader.cs" id="1_ikfsv"]
 [ext_resource type="PackedScene" uid="uid://bi2ffwbc8uxsm" path="res://Scenes/main_menu.tscn" id="2_5dgvu"]
 [ext_resource type="Script" uid="uid://bf6fx6wubcsw" path="res://Scripts/LoadManager.cs" id="7_7iton"]
-[ext_resource type="PackedScene" uid="uid://smn3jde6yxg2" path="res://Scenes/pause_menu.tscn" id="8_uscyt"]
-[ext_resource type="PackedScene" uid="uid://dnvr2p5h8yewv" path="res://Scenes/settings_menu.tscn" id="9_4xiap"]
 [ext_resource type="PackedScene" uid="uid://dec1e8ncitt0j" path="res://Scenes/loading_screen.tscn" id="9_ikfsv"]
-[ext_resource type="PackedScene" uid="uid://b180tefivq6sp" path="res://Scenes/credits_menu.tscn" id="10_w8jfd"]
 [ext_resource type="AudioStream" uid="uid://con3d4kdoijw3" path="res://Assets/Music/752104__frankum__the-mirror.wav" id="11_4xiap"]
 [ext_resource type="Script" uid="uid://cj82jicse76l1" path="res://Scripts/AudioManager.cs" id="13_wywco"]
 
 [node name="GameScene" type="Node2D" unique_id=975980312]
+
+[node name="GameManager" type="Node2D" parent="." unique_id=1782959087 node_paths=PackedStringArray("_loadManger", "_zoneContainer")]
+script = ExtResource("1_b6fju")
+_loadManger = NodePath("../LoadManager")
+_zoneContainer = NodePath("../LevelScenes")
 
 [node name="LevelLoader" type="Node2D" parent="." unique_id=2014242236]
 script = ExtResource("1_ikfsv")
@@ -20,23 +22,9 @@ script = ExtResource("1_ikfsv")
 
 [node name="MainMenu" parent="LevelLoader/CurrentScene" unique_id=2027262492 instance=ExtResource("2_5dgvu")]
 
-[node name="GameManager" type="Node2D" parent="." unique_id=1782959087 node_paths=PackedStringArray("_loadManger", "_zoneContainer")]
-script = ExtResource("1_b6fju")
-_loadManger = NodePath("../LoadManager")
-_zoneContainer = NodePath("../LevelScenes")
-
 [node name="LevelScenes" type="Node2D" parent="." unique_id=180943300]
 
 [node name="GUI" type="CanvasLayer" parent="." unique_id=314886423]
-
-[node name="PauseMenu" parent="GUI" unique_id=797256038 instance=ExtResource("8_uscyt")]
-visible = false
-
-[node name="SettingsMenu" parent="GUI" unique_id=1010001339 instance=ExtResource("9_4xiap")]
-visible = false
-
-[node name="CreditsMenu" parent="GUI" unique_id=1738975394 instance=ExtResource("10_w8jfd")]
-visible = false
 
 [node name="LoadManager" type="Node2D" parent="." unique_id=661823237 node_paths=PackedStringArray("_loadingScreen")]
 visible = false

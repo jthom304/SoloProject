@@ -93,14 +93,23 @@ public partial class PlayerController : CharacterBody2D
   */
     public override void _PhysicsProcess(double deltaTime)
     {
-        Vector2 movementVelocity = this.Velocity;
+        Vector2 movementVelocity = Velocity;
 
         movementVelocity = HandleMovement(movementVelocity);
-
         movementVelocity = HandleJump(movementVelocity, deltaTime);
 
         Velocity = movementVelocity;
         MoveAndSlide();
+
+        GD.Print("Player position: ", GlobalPosition);
+        //Vector2 movementVelocity = this.Velocity;
+
+        //movementVelocity = HandleMovement(movementVelocity);
+
+        //movementVelocity = HandleJump(movementVelocity, deltaTime);
+
+        //Velocity = movementVelocity;
+        //MoveAndSlide();
     }
 
     /*
@@ -111,7 +120,6 @@ public partial class PlayerController : CharacterBody2D
    */
     private Vector2 HandleMovement(Vector2 movementVelocity)
     {
-        //play idle animation;
         movementVelocity.X = 0f;
 
         //action map inputs and outcomes
@@ -119,11 +127,13 @@ public partial class PlayerController : CharacterBody2D
         {
             movementVelocity.X -= PlayerSpeed * PixelsPerMeter;
             //move left animation
+            GD.Print("moveleft");
         }
         if (Input.IsActionPressed("MoveForward"))
         {
             movementVelocity.X += PlayerSpeed * PixelsPerMeter;
             //move right animation
+            GD.Print("moveright");
         }
 
         return movementVelocity;

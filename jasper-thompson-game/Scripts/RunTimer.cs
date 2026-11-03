@@ -10,8 +10,6 @@ public partial class RunTimer : Control
     [Export]
     private Timer _timerObj;
 
-    //ref to player
-    [Export]
     private GameManager _gameManager;
 
     public float TimeLeft; //TimeLeft in timer countdown
@@ -24,6 +22,18 @@ public partial class RunTimer : Control
     */
     public override void _Ready()
     {
+        _gameManager = LevelLoader.Instance.GameManagerRef;
+        if (_gameManager == null )
+        {
+            GD.Print("No manager bro");
+            return;
+        }
+
+        if (_timerObj == null || _timeDisplay == null)
+        {
+            GD.Print("No timer or label");
+        }
+
         TimeLeft = 60;
         UpdateTime(TimeLeft);
 
