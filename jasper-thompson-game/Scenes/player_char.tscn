@@ -244,9 +244,8 @@ script = ExtResource("1_05cut")
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1063021127]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_vmj7y")
-animation = &"Idle"
+animation = &"Run"
 autoplay = "Idle"
-frame_progress = 0.22838825
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1503268997]
 scale = Vector2(1.12, 1.12)

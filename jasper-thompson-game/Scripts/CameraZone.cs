@@ -6,21 +6,27 @@ public partial class CameraZone : Area2D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        CallDeferred("_LateReady");
+        BodyEntered += PlayerEntered;
     }
 
-    private void _LateReady()
+    public void PlayerEntered(Node2D playerBody)
     {
-
+        if (playerBody is PlayerController)
+        {
+            ActivateZone();
+        }
     }
 
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(double delta)
+    public void ActivateZone()
     {
-    }
+        CameraController cameraBody = LevelLoader.Instance.GameManagerRef.CameraObj;
 
-    public void PlayerEntered()
-    {
-
+        if (cameraBody == null)
+        {
+            GD.Print("No camera");
+            return;
+        }
+        cameraBody.SwitchZone(this);
+        GD.Print("Camera Zone Activated: " + this.Name);
     }
 }

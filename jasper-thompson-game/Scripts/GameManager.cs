@@ -18,6 +18,9 @@ public partial class GameManager : Node2D
 
     public PlayerController PlayerRef { get; private set; }
 
+    public CameraController CameraObj { get; private set; }
+
+
     /*
        Name: CheckTimer
        Description: checks to see if win condition is satisfied
@@ -57,8 +60,7 @@ public partial class GameManager : Node2D
 
     public void MovePlayer(Node newLevel)
     {
-        Node2D spawnPoint =
-    newLevel.FindChild("SpawnLocation", true, false) as Node2D;
+        Node2D spawnPoint = newLevel.FindChild("SpawnLocation", true, false) as Node2D;
 
         if (spawnPoint == null || PlayerRef == null)
         {
@@ -66,49 +68,29 @@ public partial class GameManager : Node2D
             return;
         }
 
-        GD.Print("Parent position: " + spawnPoint.GetParent<Node2D>().GlobalPosition);
-        GD.Print("Spawn local: " + spawnPoint.Position);
-        GD.Print("Spawn global: " + spawnPoint.GlobalPosition);
-
+        PlayerRef.IsTransitioning = true;
         PlayerRef.Velocity = Vector2.Zero;
         PlayerRef.GlobalPosition = spawnPoint.GlobalPosition;
+        PlayerRef.Velocity = Vector2.Zero;
+        PlayerRef.IsTransitioning = false;
+    }
 
-        GD.Print("Player position: " + PlayerRef.GlobalPosition);
-        //if (newLevel == null)
-        //{
-        //    GD.PrintErr("New level is null!");
-        //    return;
-        //}
+    public void FindCamera(Node newLevel)
+    {
+        CameraObj = newLevel.FindChild("Camera2D", true, false) as CameraController;
 
-        //if (PlayerRef == null)
-        //{
-        //    GD.PrintErr("PlayerRef is null!");
-        //    return;
-        //}
-
-        //_spawnPoint = newLevel.GetNode<Node2D>("Portals/LeftPortal/SpawnLocation");
-
-        //if (_spawnPoint == null)
-        //{
-        //    GD.PrintErr("SpawnLocation not found in new level!");
-        //    GD.Print("New level name: " + newLevel.Name);
-        //    return;
-        //}
-        ////stop movement
-        //PlayerRef.Velocity = Vector2.Zero;
-        //GD.Print("spawn found: " + _spawnPoint.GlobalPosition);
-        //PlayerRef.GlobalPosition = _spawnPoint.GlobalPosition;
-        //CameraController cameraObj = newLevel.FindChild("CameraController", true, false) as CameraController;
-        //if (cameraObj != null)
-        //{
-        //    cameraObj.SetTarget(PlayerRef);
-        //    GD.Print("Camera Found");
-        //}
-        //else
-        //{
-        //    GD.Print("No camera found");
-        //}
-
-        //    GD.Print("Player successfully moved to Level 2!" + PlayerRef.GlobalPosition);
+        if (CameraObj == null)
+        {
+            GD.Print("camera null");
+            return;
+        }
+        if (PlayerRef == null)
+        {
+            GD.Print("Player null");
+            return;
+        }
+        CameraObj.Reparent(GetParent(), true);
+        CameraObj.SetTarget(PlayerRef);
+        CameraObj.MakeCurrent(); //makes sure this camera is active in viewport
     }
 }

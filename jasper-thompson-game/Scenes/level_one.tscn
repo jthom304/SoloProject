@@ -25,6 +25,7 @@ ZonePortals = [NodePath("Portals/LeftPortal"), NodePath("Portals/RightPortal")]
 [node name="CameraZone" type="Area2D" parent="." unique_id=1776854392]
 position = Vector2(395.555, 500)
 scale = Vector2(39.7, 25.34)
+collision_mask = 2
 script = ExtResource("2_y3aq0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraZone" unique_id=1759614062]
@@ -65,10 +66,8 @@ tile_set = ExtResource("3_hi7j2")
 [node name="PlayerChar" parent="." unique_id=890270060 instance=ExtResource("7_y3aq0")]
 position = Vector2(-21, 529.395)
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=59186247 node_paths=PackedStringArray("_trackedObject", "_cameraZone")]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=59186247]
 script = ExtResource("8_ys0qe")
-_trackedObject = NodePath("../PlayerChar")
-_cameraZone = NodePath("../CameraZone")
 
 [node name="Portals" type="Node2D" parent="." unique_id=574864548]
 

@@ -95,12 +95,21 @@ public partial class LevelLoader : Node
         if (packedScene.ResourcePath == StartLevelScene)
         {
             GameManagerRef.FindPlayer(newInstance);
+            GameManagerRef.FindCamera(newInstance);
         }
 
         //move player to level 2
         if(packedScene.ResourcePath == GameLevelScene)
         {
             GameManagerRef.MovePlayer(newInstance);
+
+            CameraZone cameraZone = newInstance.FindChild("CameraZone", true, false) as CameraZone;
+
+            if (cameraZone != null)
+            {
+                GameManagerRef.CameraObj.GlobalPosition = GameManagerRef.PlayerRef.GlobalPosition;
+                cameraZone.ActivateZone();
+            }
         }
 
         if (CurrentScene != null)

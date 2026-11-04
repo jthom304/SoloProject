@@ -23,7 +23,7 @@ public partial class PlayerController : CharacterBody2D
     public delegate void StartedJumpEventHandler();
 
     [Export]
-    private PlayerAnimator _playerAnimator;
+    private AnimatedSprite2D _playerAnimator;
 
     public const float PixelsPerMeter = 200f; //units of distance
     public const float JumpVelocity = -2.5f; // 
@@ -35,10 +35,18 @@ public partial class PlayerController : CharacterBody2D
 
     private bool CrystalCollected = false;
 
+    public bool IsTransitioning { get; set; } = false;
+
     private Area2D nearItem = null;
+
 
     public override void _Ready()
     {
+        _playerAnimator = GetNode<AnimatedSprite2D>("Sprite2D");
+
+        GD.Print("Sprite Frames: " + _playerAnimator.SpriteFrames);
+        GD.Print("Animations: ", string.Join(",", _playerAnimator.SpriteFrames.GetAnimationNames()));
+
         foreach (Node childItems in GetParent().GetChildren()) //call node above playerchar
         {
             if(childItems is Area2D pickupArea)
@@ -53,7 +61,7 @@ public partial class PlayerController : CharacterBody2D
                         }
                     };
 
-                    pickupArea.BodyExited += (body) =>
+                    pickupArea.BodyExited += (body) => //taken from
                     {
                         if (body == this && nearItem == pickupArea)
                         {
@@ -93,23 +101,19 @@ public partial class PlayerController : CharacterBody2D
   */
     public override void _PhysicsProcess(double deltaTime)
     {
-        Vector2 movementVelocity = Velocity;
+        if (IsTransitioning)
+        {
+            this.Velocity = Vector2.Zero;
+            return;
+        }
+        Vector2 movementVelocity = this.Velocity;
 
         movementVelocity = HandleMovement(movementVelocity);
         movementVelocity = HandleJump(movementVelocity, deltaTime);
 
         Velocity = movementVelocity;
         MoveAndSlide();
-
-        GD.Print("Player position: ", GlobalPosition);
-        //Vector2 movementVelocity = this.Velocity;
-
-        //movementVelocity = HandleMovement(movementVelocity);
-
-        //movementVelocity = HandleJump(movementVelocity, deltaTime);
-
-        //Velocity = movementVelocity;
-        //MoveAndSlide();
+        UpdateAnimation();
     }
 
     /*
@@ -126,15 +130,17 @@ public partial class PlayerController : CharacterBody2D
         if (Input.IsActionPressed("MoveBack"))
         {
             movementVelocity.X -= PlayerSpeed * PixelsPerMeter;
-            //move left animation
-            GD.Print("moveleft");
         }
         if (Input.IsActionPressed("MoveForward"))
         {
             movementVelocity.X += PlayerSpeed * PixelsPerMeter;
-            //move right animation
-            GD.Print("moveright");
+            //GD.Print("moveright");
         }
+
+            for (int i = 0; i < GetSlideCollisionCount(); i++)
+            {
+                KinematicCollision2D collision = GetSlideCollision(i);
+            }
 
         return movementVelocity;
     }
@@ -172,11 +178,49 @@ public partial class PlayerController : CharacterBody2D
             
         }  
 
-        if(CrystalCollected == true)
-        {
-            EmitSignal(SignalName.StartedJump);
-        }
         return movementVelocity;
+    }
+
+    private void UpdateAnimation()
+    {
+        //dont change in load
+        if (IsTransitioning)
+        {
+            return;
+        }
+        //flip sprite
+        if (Velocity.X < 0f)
+        {
+            _playerAnimator.FlipH = true;
+        }
+        else if (Velocity.X > 0f)
+        {
+            _playerAnimator.FlipH = false;
+        }
+
+        if (IsOnFloor())
+        {
+            if (Velocity.X == 0)
+            {
+                _playerAnimator.Play("Idle");
+            }
+            else if (CrystalCollected)
+            {
+                _playerAnimator.Play("Run");
+            }
+            else
+            {
+                _playerAnimator.Play("Walk");
+            }
+        }
+        else if (!IsOnFloor())
+        {
+            if (CrystalCollected)
+            {
+                _playerAnimator.Play("Jump");
+            }
+            return;
+        }
     }
 
     /*
@@ -211,6 +255,7 @@ public partial class PlayerController : CharacterBody2D
     {
         if (nearItem == null)
         {
+            GD.Print("Guess who doesnt have fucking arms bozo");
             return;
         }
 
@@ -225,6 +270,7 @@ public partial class PlayerController : CharacterBody2D
         {
             WebCount++;
             nearItem.QueueFree();
+            GD.Print("Web grabbed");
         }
 
         nearItem = null;

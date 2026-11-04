@@ -15,19 +15,7 @@ public partial class CameraController : Camera2D
     public override void _Ready()
     {
         ProcessMode = ProcessModeEnum.Always;
-    }
-
-    public void SetTarget(PlayerController playerTarget)
-    {
-        _trackedObject = playerTarget;
-
-        if (_trackedObject == null)
-        {
-            GD.Print("CAMCNTRL: no trackable obj found");
-            return;
-        }
-
-        GD.Print("Player found");
+        //this.Zoom = new Vector2(1.5f, 1.5f);
     }
 
     /*
@@ -40,19 +28,32 @@ public partial class CameraController : Camera2D
     {
         if (_trackedObject == null)
         {
+            GD.Print("Camera has no target!");
             return;
         }
-        Vector2 lastPosition = this.GlobalPosition;
-        Vector2 desiredPosition = _trackedObject.GlobalPosition;
+        SetGlobalPosition(_trackedObject.GlobalPosition);
+    }
 
-        this.GlobalPosition = desiredPosition;
+    public void SetTarget(PlayerController playerTarget)
+    {
+        _trackedObject = playerTarget;
+
+        if (_trackedObject == null)
+        {
+            GD.Print("CAMCNTRL: no trackable obj found");
+            return;
+        }
+        this.GlobalPosition = _trackedObject.GlobalPosition;
     }
 
     public void SwitchZone(Area2D ncameraZone)
     {
-        this.LimitLeft = (int)(ncameraZone.Position.X - ncameraZone.GetChild<CollisionShape2D>(0).GetShape().GetRect().Size.X / 4);
-        this.LimitRight = (int)(ncameraZone.Position.X + ncameraZone.GetChild<CollisionShape2D>(0).GetShape().GetRect().Size.X / 4);
-        this.LimitTop = (int)(ncameraZone.Position.Y - ncameraZone.GetChild<CollisionShape2D>(0).GetShape().GetRect().Size.X / 4);
-        this.LimitBottom = (int)(ncameraZone.Position.Y + ncameraZone.GetChild<CollisionShape2D>(0).GetShape().GetRect().Size.X / 4);
+        this.LimitLeft = (int)(ncameraZone.GlobalPosition.X - ncameraZone.GetChild<CollisionShape2D>(0).GetShape().GetRect().Size.X / 2);
+        this.LimitRight = (int)(ncameraZone.GlobalPosition.X + ncameraZone.GetChild<CollisionShape2D>(0).GetShape().GetRect().Size.X / 2);
+        this.LimitTop = (int)(ncameraZone.GlobalPosition.Y - ncameraZone.GetChild<CollisionShape2D>(0).GetShape().GetRect().Size.Y / 2);
+        this.LimitBottom = (int)(ncameraZone.GlobalPosition.Y + ncameraZone.GetChild<CollisionShape2D>(0).GetShape().GetRect().Size.Y / 2);
+        GD.Print("ZOne pos: " + ncameraZone.GlobalPosition);
+        GD.Print("Cam pos: " + this.GlobalPosition);
+        GD.Print("Play pos: " + _trackedObject.GlobalPosition);
     }
 }
