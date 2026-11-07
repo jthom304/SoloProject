@@ -35,7 +35,7 @@ public partial class SettingsMenu : Control
 
         _volumeSlider.Value = GlobalVariables.GameVolume;
 
-        AudioManager.Instance.UpdateVolume(GlobalVariables.GameVolume);
+        //AudioManager.Instance.UpdateVolume(GlobalVariables.GameVolume);
 
         _volumeSlider.ValueChanged += AudioManager.Instance.UpdateVolume;
 

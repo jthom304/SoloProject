@@ -36,14 +36,21 @@ public partial class CameraController : Camera2D
 
     public void SetTarget(PlayerController playerTarget)
     {
+        ResetCamera(playerTarget);
+    }
+
+    public void ResetCamera(PlayerController playerTarget)
+    {
         _trackedObject = playerTarget;
 
         if (_trackedObject == null)
         {
-            GD.Print("CAMCNTRL: no trackable obj found");
+            GD.Print("Camera has no target");
             return;
         }
-        this.GlobalPosition = _trackedObject.GlobalPosition;
+
+        GlobalPosition = _trackedObject.GlobalPosition;
+        GD.Print("Camera reset to player: " + GlobalPosition);
     }
 
     public void SwitchZone(Area2D ncameraZone)
@@ -52,8 +59,28 @@ public partial class CameraController : Camera2D
         this.LimitRight = (int)(ncameraZone.GlobalPosition.X + ncameraZone.GetChild<CollisionShape2D>(0).GetShape().GetRect().Size.X / 2);
         this.LimitTop = (int)(ncameraZone.GlobalPosition.Y - ncameraZone.GetChild<CollisionShape2D>(0).GetShape().GetRect().Size.Y / 2);
         this.LimitBottom = (int)(ncameraZone.GlobalPosition.Y + ncameraZone.GetChild<CollisionShape2D>(0).GetShape().GetRect().Size.Y / 2);
-        GD.Print("ZOne pos: " + ncameraZone.GlobalPosition);
-        GD.Print("Cam pos: " + this.GlobalPosition);
-        GD.Print("Play pos: " + _trackedObject.GlobalPosition);
+        CollisionShape2D collision =
+            ncameraZone.GetChild<CollisionShape2D>(0);
+
+        GD.Print("ZONE GLOBAL: " + ncameraZone.GlobalPosition);
+        GD.Print("COLLISION LOCAL: " + collision.Position);
+        GD.Print("COLLISION GLOBAL: " + collision.GlobalPosition);
+        GD.Print("PLAYER GLOBAL: " + _trackedObject.GlobalPosition);
+        Node current = ncameraZone.GetChild(0);
+
+        while (current != null)
+        {
+            if (current is Node2D node)
+            {
+                GD.Print(
+                    "NODE: " + node.Name +
+                    " | Local: " + node.Position +
+                    " | Global: " + node.GlobalPosition +
+                    " | Scale: " + node.Scale
+                );
+            }
+
+            current = current.GetParent();
+        }
     }
 }

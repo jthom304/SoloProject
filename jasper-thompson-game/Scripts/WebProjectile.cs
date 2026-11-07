@@ -25,11 +25,16 @@ public partial class WebProjectile : CharacterBody2D
     */
     public static WebProjectile InitializeObject(Vector2 spawnPosition, Vector2 initialVelocity)
     {
+        //create new instance
         WebProjectile newProjectile = (WebProjectile)ResourceLoader.Load<PackedScene>("res://Scenes/web_projectile.tscn").Instantiate();
+        //set position
         newProjectile.Position = spawnPosition;
+        //!!ignore parents transform for mouse tracking
         newProjectile.TopLevel = true;
-        //GD.Print("Shot");
+        //set velocity
         newProjectile.ProjectileVelocity = initialVelocity;
+        //rotate
+        newProjectile.LookAt(spawnPosition + initialVelocity);
         return newProjectile;
     }
 

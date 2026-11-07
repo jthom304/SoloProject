@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://pmf8owon2dim" path="res://Scripts/GameManager.cs" id="1_b6fju"]
 [ext_resource type="Script" uid="uid://cwscxjiu8l3ps" path="res://Scripts/LevelLoader.cs" id="1_ikfsv"]
 [ext_resource type="PackedScene" uid="uid://bi2ffwbc8uxsm" path="res://Scenes/main_menu.tscn" id="2_5dgvu"]
+[ext_resource type="PackedScene" uid="uid://smn3jde6yxg2" path="res://Scenes/pause_menu.tscn" id="4_7iton"]
 [ext_resource type="Script" uid="uid://bf6fx6wubcsw" path="res://Scripts/LoadManager.cs" id="7_7iton"]
 [ext_resource type="PackedScene" uid="uid://dec1e8ncitt0j" path="res://Scenes/loading_screen.tscn" id="9_ikfsv"]
 [ext_resource type="AudioStream" uid="uid://con3d4kdoijw3" path="res://Assets/Music/752104__frankum__the-mirror.wav" id="11_4xiap"]
@@ -15,8 +16,9 @@ script = ExtResource("1_b6fju")
 _loadManger = NodePath("../LoadManager")
 _zoneContainer = NodePath("../LevelScenes")
 
-[node name="LevelLoader" type="Node2D" parent="." unique_id=2014242236]
+[node name="LevelLoader" type="Node2D" parent="." unique_id=2014242236 node_paths=PackedStringArray("_pauseMenu")]
 script = ExtResource("1_ikfsv")
+_pauseMenu = NodePath("../GUI/PauseMenu")
 
 [node name="CurrentScene" type="Node2D" parent="LevelLoader" unique_id=1920765778]
 
@@ -25,6 +27,9 @@ script = ExtResource("1_ikfsv")
 [node name="LevelScenes" type="Node2D" parent="." unique_id=180943300]
 
 [node name="GUI" type="CanvasLayer" parent="." unique_id=314886423]
+
+[node name="PauseMenu" parent="GUI" unique_id=797256038 instance=ExtResource("4_7iton")]
+visible = false
 
 [node name="LoadManager" type="Node2D" parent="." unique_id=661823237 node_paths=PackedStringArray("_loadingScreen")]
 visible = false

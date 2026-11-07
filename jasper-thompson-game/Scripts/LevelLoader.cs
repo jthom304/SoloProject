@@ -22,6 +22,9 @@ public partial class LevelLoader : Node
     [Export]
     public string WinScreen { get; set; } = "res://Scenes/win_screen.tscn";
 
+    [Export]
+    private PauseMenu _pauseMenu;
+
     //currernt scene shown
     private Node CurrentScene;
     private Node sceneContainer;
@@ -77,7 +80,14 @@ public partial class LevelLoader : Node
     private void OnLevelLoaded(Resource LevelLoaded)
     {
         GD.Print("LL called");
+
+        //what is next level
         PackedScene packedScene = LevelLoaded as PackedScene;
+       
+        //what scenes can pause 
+        bool CanPause = packedScene.ResourcePath == StartLevelScene || packedScene.ResourcePath == GameLevelScene;
+        _pauseMenu.Visible = false;
+        _pauseMenu.SetProcess(CanPause);
 
         if (packedScene == null)
         {
@@ -85,11 +95,24 @@ public partial class LevelLoader : Node
             return;
         }
 
-        GD.Print("Loading scene: " + packedScene.ResourcePath);
         Node newInstance = packedScene.Instantiate();
 
-        //add new level first
+        if (CurrentScene != null)
+        {
+            //remove current scene
+            sceneContainer.RemoveChild(CurrentScene);
+            //delete scene
+            CurrentScene.QueueFree();
+            //reset for bug catching
+            CurrentScene = null;
+        }
+
+        //add new scene
         sceneContainer.AddChild(newInstance);
+
+        //player and camera setup
+        Node2D spawn = newInstance.FindChild("SpawnLocation", true, false) as Node2D;
+        Node2D zone = newInstance.FindChild("CameraZone", true, false) as Node2D;
 
         //find player and keep it from being destroyed by level load
         if (packedScene.ResourcePath == StartLevelScene)
@@ -99,27 +122,20 @@ public partial class LevelLoader : Node
         }
 
         //move player to level 2
-        if(packedScene.ResourcePath == GameLevelScene)
+        else if(packedScene.ResourcePath == GameLevelScene)
         {
             GameManagerRef.MovePlayer(newInstance);
+
+            GameManagerRef.CameraObj.ResetCamera(GameManagerRef.PlayerRef);
 
             CameraZone cameraZone = newInstance.FindChild("CameraZone", true, false) as CameraZone;
 
             if (cameraZone != null)
             {
-                GameManagerRef.CameraObj.GlobalPosition = GameManagerRef.PlayerRef.GlobalPosition;
                 cameraZone.ActivateZone();
             }
         }
 
-        if (CurrentScene != null)
-        {
-            GD.Print("Removing old scene: " + CurrentScene.Name);
-            CurrentScene.QueueFree();
-        }
-
         CurrentScene = newInstance;
-        GD.Print("New scene added: " + CurrentScene.Name);
-
     }
 }

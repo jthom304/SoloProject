@@ -30,7 +30,7 @@ public partial class PlayerController : CharacterBody2D
     public const float PlayerSpeed = 1f; //speed of travel
     public const float WorldGravity = 5f; //gravity var
     public const float FallGravity = 7.5f; //fall gravity var 
-    public float WebSpeed = 10;
+    public float WebSpeed = 6;
     private int WebCount = 0;
 
     private bool CrystalCollected = false;
@@ -44,33 +44,7 @@ public partial class PlayerController : CharacterBody2D
     {
         _playerAnimator = GetNode<AnimatedSprite2D>("Sprite2D");
 
-        GD.Print("Sprite Frames: " + _playerAnimator.SpriteFrames);
-        GD.Print("Animations: ", string.Join(",", _playerAnimator.SpriteFrames.GetAnimationNames()));
-
-        foreach (Node childItems in GetParent().GetChildren()) //call node above playerchar
-        {
-            if(childItems is Area2D pickupArea)
-            {
-                if(pickupArea.Name == "CrystalItem" || pickupArea.IsInGroup("WebItem"))
-                {
-                    pickupArea.BodyEntered += (body) => //10/30/26 taken from
-                    {
-                        if (body == this)
-                        {
-                            nearItem = pickupArea;
-                        }
-                    };
-
-                    pickupArea.BodyExited += (body) => //taken from
-                    {
-                        if (body == this && nearItem == pickupArea)
-                        {
-                            nearItem = null;
-                        }
-                    };
-                }
-            }
-        }
+        FindPickups();
     }
 
     /*
@@ -81,6 +55,7 @@ public partial class PlayerController : CharacterBody2D
  */
     public override void _Process(double delta)
     {
+        GD.Print("player process running");
         if (Input.IsActionJustPressed("UseItem"))
         {
             UseItem();
@@ -88,7 +63,17 @@ public partial class PlayerController : CharacterBody2D
 
         if (Input.IsActionJustPressed("PickUp") && nearItem != null)
         {
-            PickUp();
+            GD.Print("Q pressed");
+            if (nearItem != null)
+            {
+                GD.Print("Item detected: ",  nearItem.Name);
+                PickUp();
+            }
+            else
+            {
+                GD.Print("no item");
+            }
+            
         }
 
     }
@@ -233,22 +218,53 @@ public partial class PlayerController : CharacterBody2D
     {
         if (WebCount > 0)
         {
+            //get audio clip
             GetNode<AudioStreamPlayer2D>("SplatSFX").Play();
             //get spawn location
             Vector2 spawnLocation = this.GetNode<Node2D>("ProjectileLocation").GlobalPosition;
             //so projectile shoots in right direction
-            Vector2 projectileVelocity = new Vector2((float)Math.Cos(Rotation), (float)Math.Sin(Rotation)) * PixelsPerMeter * WebSpeed;
+            Vector2 itemDirectioN = (GetGlobalMousePosition() - spawnLocation).Normalized();
+            //calculate velocity
+            Vector2 projectileVelocity = itemDirectioN * PixelsPerMeter * WebSpeed;
             //set and spawn projectile
             Node newProjectile = WebProjectile.InitializeObject(spawnLocation, projectileVelocity);
             this.AddChild(newProjectile);
+            //update count
             WebCount--;
             //GD.Print("Shot1");
         }
     }
 
-    private void HandleMouse()
+    public void FindPickups()
     {
-        LookAt(GetGlobalMousePosition()); //looking at where the mouse is
+        GD.Print("Searching for pickups");
+
+        foreach (Node childItems in GetTree().GetNodesInGroup("PickupItems")) //call node above playerchar
+        {
+            if (childItems is Area2D pickupArea)
+            {
+                GD.Print("Connecting pickup: ", pickupArea.Name);
+                GD.Print("Is WebItem: ", pickupArea.IsInGroup("WebItem"));
+                GD.Print("Is CrystalItem: ", pickupArea.IsInGroup("CrystalItem"));
+                pickupArea.BodyEntered += (body) => //10/30/26 taken from
+                {
+                    if (body == this)
+                    {
+                        GD.Print("Player entered: ", pickupArea.Name);
+                        nearItem = pickupArea;
+                    }
+                };
+
+                pickupArea.BodyExited += (body) => //taken from
+                {
+                    if (body == this && nearItem == pickupArea)
+                    {
+                        nearItem = null;
+                    }
+                };
+                GD.Print("Found Pickup: " + pickupArea.Name);
+            }
+        }
     }
 
     private void PickUp()
@@ -259,20 +275,17 @@ public partial class PlayerController : CharacterBody2D
             return;
         }
 
-        if(nearItem.Name == "CrystalItem")
+        if(nearItem.IsInGroup ("CrystalItem"))
         {
             CrystalCollected = true;
-            nearItem.QueueFree();
-            //switch animation to coin run
             //trigger BFOF spawn
         }
         else if (nearItem.IsInGroup("WebItem"))
         {
             WebCount++;
-            nearItem.QueueFree();
-            GD.Print("Web grabbed");
+            GD.Print("Web grabbed, Total Count:" + WebCount);
         }
-
+        nearItem.QueueFree();
         nearItem = null;
     }
 }

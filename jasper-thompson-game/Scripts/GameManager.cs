@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 public partial class GameManager : Node2D
 {
@@ -40,6 +41,11 @@ public partial class GameManager : Node2D
 
     public void FindPlayer(Node newLevel)
     {
+        if(PlayerRef != null && IsInstanceValid(PlayerRef))
+        {
+            GD.Print("Player already exists");
+            return;
+        }
         PlayerRef = newLevel.FindChild("PlayerChar", true, false) as PlayerController; //taken 11/2/26 https://docs.godotengine.org/en/stable/classes/class_node.html?utm_source=chatgpt.com#class-node-method-find-child
                                                                                              //basically goes through tree order looking to see if a node is a child and if owned
         if (PlayerRef == null)
@@ -47,10 +53,8 @@ public partial class GameManager : Node2D
             GD.Print("Player Not Found");
             return;
         }
-        GD.Print("Player found");
         //move player outside of level as to not delete it in the load
         PlayerRef.Reparent(GetParent(), true);
-        GD.Print("Player transition safe");
     }
 
     public void LoadNextLevel(string scenePath)
@@ -58,7 +62,7 @@ public partial class GameManager : Node2D
         LevelLoader.Instance.SwitchScene(scenePath);
     }
 
-    public void MovePlayer(Node newLevel)
+    public async Task MovePlayer(Node newLevel)
     {
         Node2D spawnPoint = newLevel.FindChild("SpawnLocation", true, false) as Node2D;
 
@@ -69,9 +73,13 @@ public partial class GameManager : Node2D
         }
 
         PlayerRef.IsTransitioning = true;
+
         PlayerRef.Velocity = Vector2.Zero;
         PlayerRef.GlobalPosition = spawnPoint.GlobalPosition;
-        PlayerRef.Velocity = Vector2.Zero;
+
+        //find pickups
+        PlayerRef.FindPickups();
+
         PlayerRef.IsTransitioning = false;
     }
 
@@ -93,4 +101,7 @@ public partial class GameManager : Node2D
         CameraObj.SetTarget(PlayerRef);
         CameraObj.MakeCurrent(); //makes sure this camera is active in viewport
     }
+
+    //lose
+    //win
 }

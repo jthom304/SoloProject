@@ -13,6 +13,16 @@ public partial class AudioManager : Node
     public void UpdateVolume(double newVolume)
     {
         GlobalVariables.GameVolume = (float)newVolume;
-        AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex("Master"), GlobalVariables.GameVolume);
+
+        float volumeDb;
+        if(newVolume <= 0)//decibel control
+        {
+            volumeDb = -80f;
+        }
+        else
+        {
+            volumeDb = Mathf.LinearToDb((float)newVolume);//searched "how to set up volume for godot slider" google ai gave table breakdown of volume and conversions for audio bus ie LinearToDb 
+        }
+            AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex("Master"), GlobalVariables.GameVolume);
     }
 }

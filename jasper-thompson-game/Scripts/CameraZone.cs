@@ -11,7 +11,7 @@ public partial class CameraZone : Area2D
 
     public void PlayerEntered(Node2D playerBody)
     {
-        if (playerBody is PlayerController)
+        if (playerBody is PlayerController playerObj && playerObj == LevelLoader.Instance.GameManagerRef.PlayerRef)
         {
             ActivateZone();
         }

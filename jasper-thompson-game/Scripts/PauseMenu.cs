@@ -15,17 +15,24 @@ public partial class PauseMenu : Control
     public override void _Ready()
     {
         ProcessMode = ProcessModeEnum.Pausable;
-
-        if(Input.IsActionJustPressed("PauseGame"))
+        this.Visible = false;
+        if (AudioManager.Instance != null)
         {
-            TogglePause();
+            _volumeSlider.Value = GlobalVariables.GameVolume;
+           // AudioManager.Instance.UpdateVolume(GlobalVariables.GameVolume);
+            _volumeSlider.ValueChanged += AudioManager.Instance.UpdateVolume;
         }
-
-        _volumeSlider.Value = GlobalVariables.GameVolume;
-        _volumeSlider.ValueChanged += AudioManager.Instance.UpdateVolume;
 
         _resumeButton.Pressed += ResumePressed;
         _exitGame.Pressed += ExitPressed;
+    }
+
+    public override void _Process(double delta)
+    {
+        if (Input.IsActionJustPressed("PauseGame"))
+        {
+            TogglePause();
+        }
     }
 
     public void TogglePause()
