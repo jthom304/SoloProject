@@ -10,12 +10,18 @@
 [ext_resource type="Script" uid="uid://sy2enqkudv6l" path="res://Scripts/CameraController.cs" id="8_ys0qe"]
 [ext_resource type="Script" uid="uid://chx7pkrmdp563" path="res://Scripts/ZonePortal.cs" id="9_ys0qe"]
 [ext_resource type="PackedScene" uid="uid://b853cyy4lihn3" path="res://Scenes/crystal_item.tscn" id="10_ep8vc"]
+[ext_resource type="PackedScene" uid="uid://cbyjlircwko6m" path="res://Scenes/BigFishFrog.tscn" id="11_tgw3l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vmj7y"]
 size = Vector2(21.021538, 20.023678)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ln5pk"]
 size = Vector2(20, 13.471512)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ln5pk"]
+vertices = PackedVector2Array(-8.359375, 548, -380.5625, 548, -372.4375, 361.53125, -345.17188, 363.0078, -36.320313, 357, 61.203125, 364.96875, 817.0078, 380, 1175.8516, 383.89063, 1172.1406, 640.1328, 178.57031, 653.96094, 330.67188, 386)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(0, 3, 4, 5), PackedInt32Array(6, 7, 8, 9, 10), PackedInt32Array(5, 10, 9, 0)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-345, 353, -36, 347, 62, 355, 331, 376, 817, 370, 1186, 374, 1182, 650, 176, 664, -11, 558, -391, 558, -382, 351)])
 
 [node name="Level1" type="Node2D" unique_id=1036097707 node_paths=PackedStringArray("CameraZone", "zoneBoundary", "ZonePortals")]
 script = ExtResource("1_y3aq0")
@@ -109,3 +115,12 @@ shape = SubResource("RectangleShape2D_ln5pk")
 
 [node name="CrystalItem" parent="." unique_id=2089313040 instance=ExtResource("10_ep8vc")]
 position = Vector2(600, 600)
+
+[node name="EnemyController" parent="." unique_id=1129597246 instance=ExtResource("11_tgw3l")]
+position = Vector2(-251, 447)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1764581720]
+navigation_polygon = SubResource("NavigationPolygon_ln5pk")
+
+[node name="EnemySpawnLocation" type="Node2D" parent="." unique_id=1680085325]
+position = Vector2(-280, 448)

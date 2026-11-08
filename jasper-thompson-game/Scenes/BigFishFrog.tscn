@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://cbyjlircwko6m"]
+
+[ext_resource type="Script" uid="uid://bumx4eo5yomki" path="res://Scripts/EnemyController.cs" id="1_h5glx"]
+[ext_resource type="Texture2D" uid="uid://cp5ksje6f73qs" path="res://Assets/Sprites/BFOFPrototype.png" id="1_r6bm3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vmj7y"]
+radius = 63.56886
+
+[node name="EnemyController" type="CharacterBody2D" unique_id=1129597246]
+collision_layer = 64
+collision_mask = 2
+script = ExtResource("1_h5glx")
+BoostSpeed = 0.6
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1550638254]
+texture = ExtResource("1_r6bm3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=472095175]
+position = Vector2(-26, 1)
+shape = SubResource("CircleShape2D_vmj7y")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1128307728]

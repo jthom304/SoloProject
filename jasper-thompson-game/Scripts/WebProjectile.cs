@@ -64,15 +64,14 @@ public partial class WebProjectile : CharacterBody2D
             }
             else if (collidedObj != null)
             {
-                // if get collider = BFOF 
-                //if (collidedObj.IsInGroup("Targets"))
-                //{
-                //    QueueFree();
-                //    BFOFSlowDown(); 
-                //}
+                if (collidedObj is EnemyController enemyObj)
+                {
+                    LevelLoader.Instance.GameManagerRef.EnemyRef.SlowDown();
+                    QueueFree();
+                    return;
+                }
                 if (collidedObj.IsInGroup("Wall"))
                 {
-                    //GD.Print("Is Wall");
                     QueueFree();
                     return;
                 }

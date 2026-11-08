@@ -278,7 +278,6 @@ public partial class PlayerController : CharacterBody2D
         if(nearItem.IsInGroup ("CrystalItem"))
         {
             CrystalCollected = true;
-            //trigger BFOF spawn
         }
         else if (nearItem.IsInGroup("WebItem"))
         {

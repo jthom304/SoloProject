@@ -55,6 +55,12 @@ public partial class RunTimer : Control
 
         _gameManager.CheckTimer(TimeLeft);
 
+        //speed up enemy every 5 seconds 
+        if (TimeLeft % 5 == 0)
+        {
+            _gameManager.SpeedUpEnemy();
+        }
+
         if (TimeLeft <= 0)
         {
             _timerObj.Stop();

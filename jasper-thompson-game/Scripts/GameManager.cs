@@ -19,6 +19,8 @@ public partial class GameManager : Node2D
 
     public PlayerController PlayerRef { get; private set; }
 
+    public EnemyController EnemyRef { get; private set; }
+
     public CameraController CameraObj { get; private set; }
 
 
@@ -32,8 +34,7 @@ public partial class GameManager : Node2D
     {
         if (timeLeft <= 0) //if time runs out
         {
-            //show win menu
-            //pause game 
+            WinGame();
             this.QueueFree();
             return;
         }
@@ -55,6 +56,28 @@ public partial class GameManager : Node2D
         }
         //move player outside of level as to not delete it in the load
         PlayerRef.Reparent(GetParent(), true);
+    }
+
+    public void FindEnemy(Node newLevel)
+    {
+        if(EnemyRef != null && IsInstanceValid(EnemyRef))
+        {
+            GD.Print("Enemey already Exsists");
+            return;
+        }
+
+        EnemyRef = newLevel.FindChild("EnemyController", true, false) as EnemyController;
+
+        if(EnemyRef == null)
+        {
+            GD.Print("Enemy Not Found");
+            return;
+        }
+        GD.Print("Enemy Found");
+        //keep enemy alive during level change
+        EnemyRef.Reparent(GetParent(), true);
+        //Give enemy player reference
+        EnemyRef.SetPlayer(PlayerRef);
     }
 
     public void LoadNextLevel(string scenePath)
@@ -83,6 +106,31 @@ public partial class GameManager : Node2D
         PlayerRef.IsTransitioning = false;
     }
 
+    public void MoveEnemy(Node newLevel)
+    {
+        if (EnemyRef == null)
+        {
+            return;
+        }
+
+        Node2D spawnPoint = newLevel.FindChild("EnemySpawnLocation", true, false) as Node2D;
+
+        NavigationRegion2D navRegion = newLevel.FindChild("NavigationRegion2D", true, false) as NavigationRegion2D;
+
+        if(spawnPoint == null)
+        {
+            GD.Print("spawn not found");
+            return;
+        }
+        if (navRegion == null)
+        {
+            GD.Print("nav not found");
+            return;
+        }
+
+        EnemyRef.MoveToLevel(spawnPoint.GlobalPosition, navRegion);
+    }
+
     public void FindCamera(Node newLevel)
     {
         CameraObj = newLevel.FindChild("Camera2D", true, false) as CameraController;
@@ -102,6 +150,48 @@ public partial class GameManager : Node2D
         CameraObj.MakeCurrent(); //makes sure this camera is active in viewport
     }
 
-    //lose
-    //win
+    public void SpeedUpEnemy()
+    {
+        if (EnemyRef != null)
+        {
+            EnemyRef.SpeedUp();
+        }
+    }
+
+    public void KillPlayer()
+    {
+        LoseGame();
+    }
+
+    public void RemoveCharacters()
+    {
+        if (CameraObj != null)
+        {
+            CameraObj.SetProcess(false);
+        }
+        if (EnemyRef != null)
+        {
+            EnemyRef.QueueFree();
+        }
+        if (PlayerRef != null)
+        {
+            PlayerRef.QueueFree();
+        }
+        PlayerRef = null;
+        EnemyRef = null;
+    }
+
+    public void LoseGame()
+    {
+        RemoveCharacters();
+        GetTree().Paused = false;
+        LevelLoader.Instance.SwitchScene(LevelLoader.Instance.LoseScreen);
+    }
+    
+    public void WinGame()
+    {
+        RemoveCharacters();
+        GetTree().Paused = false;
+        LevelLoader.Instance.SwitchScene(LevelLoader.Instance.WinScreen);
+    }
 }

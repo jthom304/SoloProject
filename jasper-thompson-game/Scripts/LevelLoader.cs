@@ -23,6 +23,9 @@ public partial class LevelLoader : Node
     public string WinScreen { get; set; } = "res://Scenes/win_screen.tscn";
 
     [Export]
+    public string LoseScreen { get; set; } = "res://Scenes/lose_screen.tscn";
+
+    [Export]
     private PauseMenu _pauseMenu;
 
     //currernt scene shown
@@ -80,20 +83,19 @@ public partial class LevelLoader : Node
     private void OnLevelLoaded(Resource LevelLoaded)
     {
         GD.Print("LL called");
-
         //what is next level
         PackedScene packedScene = LevelLoaded as PackedScene;
-       
-        //what scenes can pause 
-        bool CanPause = packedScene.ResourcePath == StartLevelScene || packedScene.ResourcePath == GameLevelScene;
-        _pauseMenu.Visible = false;
-        _pauseMenu.SetProcess(CanPause);
 
         if (packedScene == null)
         {
             GD.Print("PackedScene == null");
             return;
         }
+       
+        //what scenes can pause 
+        bool CanPause = packedScene.ResourcePath == StartLevelScene || packedScene.ResourcePath == GameLevelScene;
+        _pauseMenu.Visible = false;
+        _pauseMenu.SetProcess(CanPause);
 
         Node newInstance = packedScene.Instantiate();
 
@@ -118,6 +120,7 @@ public partial class LevelLoader : Node
         if (packedScene.ResourcePath == StartLevelScene)
         {
             GameManagerRef.FindPlayer(newInstance);
+            GameManagerRef.FindEnemy(newInstance);
             GameManagerRef.FindCamera(newInstance);
         }
 
@@ -125,6 +128,7 @@ public partial class LevelLoader : Node
         else if(packedScene.ResourcePath == GameLevelScene)
         {
             GameManagerRef.MovePlayer(newInstance);
+            GameManagerRef.MoveEnemy(newInstance);
 
             GameManagerRef.CameraObj.ResetCamera(GameManagerRef.PlayerRef);
 

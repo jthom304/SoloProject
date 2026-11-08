@@ -17,6 +17,7 @@ _loadManger = NodePath("../LoadManager")
 _zoneContainer = NodePath("../LevelScenes")
 
 [node name="LevelLoader" type="Node2D" parent="." unique_id=2014242236 node_paths=PackedStringArray("_pauseMenu")]
+process_mode = 3
 script = ExtResource("1_ikfsv")
 _pauseMenu = NodePath("../GUI/PauseMenu")
 
@@ -32,6 +33,7 @@ _pauseMenu = NodePath("../GUI/PauseMenu")
 visible = false
 
 [node name="LoadManager" type="Node2D" parent="." unique_id=661823237 node_paths=PackedStringArray("_loadingScreen")]
+process_mode = 3
 visible = false
 script = ExtResource("7_7iton")
 _loadingScreen = NodePath("LoadingScreen")
