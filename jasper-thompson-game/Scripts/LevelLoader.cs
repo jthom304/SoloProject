@@ -91,13 +91,26 @@ public partial class LevelLoader : Node
             GD.Print("PackedScene == null");
             return;
         }
-       
+
+        //switch music based on scenes
+        if(packedScene.ResourcePath == MenuScene)
+        {
+            AudioManager.Instance.PlayMainMenuMusic();
+        }
+        if (packedScene.ResourcePath == StartLevelScene)
+        {
+            AudioManager.Instance.PlayLevelOneMusic();
+        }
+        if (packedScene.ResourcePath == GameLevelScene)
+        {
+            AudioManager.Instance.PlayLevelTwoMusic();
+        }
+
         //what scenes can pause 
         bool CanPause = packedScene.ResourcePath == StartLevelScene || packedScene.ResourcePath == GameLevelScene;
         _pauseMenu.Visible = false;
         _pauseMenu.SetProcess(CanPause);
 
-        Node newInstance = packedScene.Instantiate();
 
         if (CurrentScene != null)
         {
@@ -108,9 +121,32 @@ public partial class LevelLoader : Node
             //reset for bug catching
             CurrentScene = null;
         }
+        Node newInstance = packedScene.Instantiate();
 
+        GD.Print("LoadingScene: " + packedScene.ResourcePath);
+        GD.Print("Scene B4 clidren: " + sceneContainer.GetChildCount());
         //add new scene
         sceneContainer.AddChild(newInstance);
+        GD.Print("SceneChildrenAfter: " + sceneContainer.GetChildCount());
+        GD.Print("New Scene: " + newInstance.Name);
+        GD.Print("Lose Screen Type: " + newInstance.GetType().Name);
+        GD.Print("Lose Screen children: " + newInstance.GetChildCount());
+
+        if (newInstance is CanvasItem item)
+        {
+            GD.Print("Lose screen visible: " + item.IsVisibleInTree());
+        }
+        else
+        {
+            GD.Print("New scene is not a CanvasItem");
+        }
+        Control control = newInstance as Control;
+
+        if (control != null)
+        {
+            GD.Print("Visible: " + control.IsVisibleInTree());
+        }
+
 
         //player and camera setup
         Node2D spawn = newInstance.FindChild("SpawnLocation", true, false) as Node2D;

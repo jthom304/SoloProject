@@ -19,12 +19,25 @@ public partial class PauseMenu : Control
         if (AudioManager.Instance != null)
         {
             _volumeSlider.Value = GlobalVariables.GameVolume;
-           // AudioManager.Instance.UpdateVolume(GlobalVariables.GameVolume);
             _volumeSlider.ValueChanged += AudioManager.Instance.UpdateVolume;
+            AudioManager.Instance.VolumeChanged;
         }
 
         _resumeButton.Pressed += ResumePressed;
         _exitGame.Pressed += ExitPressed;
+    }
+
+    private void VolumeChanged(float newVolume)
+    {
+        _volumeSlider.SetValueNoSignal(newVolume);
+    }
+
+    public override void _ExitTree()
+    {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.VolumeChanged -= OnVolumeChanged;
+        }
     }
 
     public override void _Process(double delta)

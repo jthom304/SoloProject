@@ -29,6 +29,7 @@ public partial class CameraController : Camera2D
         if (_trackedObject == null)
         {
             GD.Print("Camera has no target!");
+            SetProcess(false);
             return;
         }
         SetGlobalPosition(_trackedObject.GlobalPosition);
@@ -41,13 +42,15 @@ public partial class CameraController : Camera2D
 
     public void ResetCamera(PlayerController playerTarget)
     {
-        _trackedObject = playerTarget;
-
-        if (_trackedObject == null)
+        if (playerTarget == null)
         {
             GD.Print("Camera has no target");
+            _trackedObject = null;
+            SetProcess(false);
             return;
         }
+        _trackedObject = playerTarget;
+        SetProcess(true);
 
         GlobalPosition = _trackedObject.GlobalPosition;
         GD.Print("Camera reset to player: " + GlobalPosition);

@@ -34,12 +34,23 @@ public partial class SettingsMenu : Control
         GD.Print("All references found!");
 
         _volumeSlider.Value = GlobalVariables.GameVolume;
-
-        //AudioManager.Instance.UpdateVolume(GlobalVariables.GameVolume);
-
         _volumeSlider.ValueChanged += AudioManager.Instance.UpdateVolume;
+        AudioManager.Instance.VolumeChanged += OnVolumeChanged;
 
         _backButton.Pressed += BackPressed;
+    }
+    
+    private void OnVolumeChanged(float newVolume)
+    {
+        _volumeSlider.SetValueNoSignal(newVolume);
+    }
+
+    public override void _ExitTree()
+    {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.VolumeChanged -= OnVolumeChanged;
+        }
     }
 
     public void BackPressed()

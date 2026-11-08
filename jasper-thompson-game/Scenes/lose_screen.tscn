@@ -1,18 +1,33 @@
 [gd_scene format=3 uid="uid://c35olm7mvtsx8"]
 
 [ext_resource type="Texture2D" uid="uid://cwii0gamvf85d" path="res://Assets/Art/MenuBG.png" id="1_38ql5"]
+[ext_resource type="Script" uid="uid://bl2sxuyfjcygq" path="res://Scripts/LoseScreen.cs" id="1_ak4yb"]
 [ext_resource type="FontFile" uid="uid://df62akgvq7mrr" path="res://Assets/Fonts/alagard.ttf" id="2_ak4yb"]
 [ext_resource type="Texture2D" uid="uid://bfp2qyhyt1x4q" path="res://Assets/Art/Button.png" id="3_1oqbe"]
 [ext_resource type="FontFile" uid="uid://ctt8dbbodf75b" path="res://Assets/Fonts/PearSoda.ttf" id="4_7r1e1"]
 [ext_resource type="Texture2D" uid="uid://cp5ksje6f73qs" path="res://Assets/Sprites/BFOFPrototype.png" id="5_djuyn"]
 
-[node name="LoseScreen" type="Control" unique_id=821938347]
+[node name="LoseScreen" type="Control" unique_id=821938347 node_paths=PackedStringArray("_menuButton", "_exitButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 579.0
+offset_top = 351.0
+offset_right = 579.0
+offset_bottom = 351.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_ak4yb")
+_menuButton = NodePath("PanelContainer/TextureRect/MainMenu")
+_exitButton = NodePath("PanelContainer/TextureRect/ExitButton")
+
+[node name="Label" type="Label" parent="." unique_id=731263670]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "LOSE SCREEN TEST "
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1945669961]
 layout_mode = 1

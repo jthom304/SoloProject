@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bi2ffwbc8uxsm" path="res://Scenes/main_menu.tscn" id="2_5dgvu"]
 [ext_resource type="PackedScene" uid="uid://smn3jde6yxg2" path="res://Scenes/pause_menu.tscn" id="4_7iton"]
 [ext_resource type="Script" uid="uid://bf6fx6wubcsw" path="res://Scripts/LoadManager.cs" id="7_7iton"]
+[ext_resource type="AudioStream" uid="uid://c8n3812hf0qr" path="res://Assets/Music/681705__seth_makes_sounds__goth-rave-song-120bpm.wav" id="9_5dgvu"]
 [ext_resource type="PackedScene" uid="uid://dec1e8ncitt0j" path="res://Scenes/loading_screen.tscn" id="9_ikfsv"]
 [ext_resource type="AudioStream" uid="uid://con3d4kdoijw3" path="res://Assets/Music/752104__frankum__the-mirror.wav" id="11_4xiap"]
 [ext_resource type="Script" uid="uid://cj82jicse76l1" path="res://Scripts/AudioManager.cs" id="13_wywco"]
@@ -33,7 +34,6 @@ _pauseMenu = NodePath("../GUI/PauseMenu")
 visible = false
 
 [node name="LoadManager" type="Node2D" parent="." unique_id=661823237 node_paths=PackedStringArray("_loadingScreen")]
-process_mode = 3
 visible = false
 script = ExtResource("7_7iton")
 _loadingScreen = NodePath("LoadingScreen")
@@ -41,8 +41,13 @@ _loadingScreen = NodePath("LoadingScreen")
 [node name="LoadingScreen" parent="LoadManager" unique_id=409254777 instance=ExtResource("9_ikfsv")]
 visible = false
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1369733084]
-process_mode = 3
-stream = ExtResource("11_4xiap")
-autoplay = true
+[node name="AudioManager" type="Node" parent="." unique_id=1808295711 node_paths=PackedStringArray("_musicPlayer")]
 script = ExtResource("13_wywco")
+_musicPlayer = NodePath("AudioStreamPlayer")
+_mainMusic = ExtResource("11_4xiap")
+_levelOneMusic = ExtResource("11_4xiap")
+_levelTwoMusic = ExtResource("9_5dgvu")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AudioManager" unique_id=1369733084]
+process_mode = 3
+autoplay = true

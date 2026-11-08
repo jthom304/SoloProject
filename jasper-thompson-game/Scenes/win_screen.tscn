@@ -1,18 +1,27 @@
 [gd_scene format=3 uid="uid://rg76yf3npa3n"]
 
 [ext_resource type="Texture2D" uid="uid://cwii0gamvf85d" path="res://Assets/Art/MenuBG.png" id="1_85imr"]
+[ext_resource type="Script" uid="uid://ctjm262pkjilu" path="res://Scripts/WinScreen.cs" id="1_mf36t"]
 [ext_resource type="FontFile" uid="uid://df62akgvq7mrr" path="res://Assets/Fonts/alagard.ttf" id="2_mf36t"]
 [ext_resource type="Texture2D" uid="uid://fr1i3fvfreti" path="res://Assets/Art/crystal.png" id="3_pq638"]
 [ext_resource type="Texture2D" uid="uid://bfp2qyhyt1x4q" path="res://Assets/Art/Button.png" id="4_8snof"]
 [ext_resource type="FontFile" uid="uid://ctt8dbbodf75b" path="res://Assets/Fonts/PearSoda.ttf" id="5_1rjdi"]
 
-[node name="WinScreen" type="Control" unique_id=352260239]
+[node name="WinScreen" type="Control" unique_id=352260239 node_paths=PackedStringArray("_menuButton", "_exitButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 590.0
+offset_top = 365.0
+offset_right = 590.0
+offset_bottom = 365.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_mf36t")
+_menuButton = NodePath("PanelContainer/TextureRect/MainMenu")
+_exitButton = NodePath("PanelContainer/TextureRect/ExitButton")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=403616684]
 layout_mode = 1

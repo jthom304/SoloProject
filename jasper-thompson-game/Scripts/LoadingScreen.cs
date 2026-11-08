@@ -33,7 +33,8 @@ public partial class LoadingScreen : CanvasLayer
 
     public void OnFadeFinished(StringName finishedAnimation)
     {
-        if(finishedAnimation == "FadeIn")
+        GD.Print("Animation Finished: " + finishedAnimation);
+        if (finishedAnimation == "FadeIn")
         {
             EmitSignal(SignalName.FadedIn);
         }

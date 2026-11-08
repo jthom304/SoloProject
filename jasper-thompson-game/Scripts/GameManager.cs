@@ -168,15 +168,21 @@ public partial class GameManager : Node2D
         if (CameraObj != null)
         {
             CameraObj.SetProcess(false);
+            CameraObj.Enabled = false;
+            CameraObj.QueueFree();
+            CameraObj = null;
         }
         if (EnemyRef != null)
         {
             EnemyRef.QueueFree();
+            EnemyRef = null;
         }
         if (PlayerRef != null)
         {
             PlayerRef.QueueFree();
+            PlayerRef = null;
         }
+        CameraObj = null;
         PlayerRef = null;
         EnemyRef = null;
     }
@@ -186,6 +192,7 @@ public partial class GameManager : Node2D
         RemoveCharacters();
         GetTree().Paused = false;
         LevelLoader.Instance.SwitchScene(LevelLoader.Instance.LoseScreen);
+        GD.Print("lose menu displayed");
     }
     
     public void WinGame()
@@ -193,5 +200,6 @@ public partial class GameManager : Node2D
         RemoveCharacters();
         GetTree().Paused = false;
         LevelLoader.Instance.SwitchScene(LevelLoader.Instance.WinScreen);
+        GD.Print("win menu displayed");
     }
 }
