@@ -118,6 +118,9 @@ position = Vector2(600, 600)
 
 [node name="EnemyController" parent="." unique_id=1129597246 instance=ExtResource("11_tgw3l")]
 position = Vector2(-251, 447)
+EnemySpeed = 0.3
+BoostSpeed = 1.0
+SpeedIncrease = 0.3
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1764581720]
 navigation_polygon = SubResource("NavigationPolygon_ln5pk")

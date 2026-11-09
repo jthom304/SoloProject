@@ -4,6 +4,7 @@
 
 [sub_resource type="Animation" id="Animation_h5lxv"]
 resource_name = "FadeIn"
+length = 1.1666666
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -11,7 +12,7 @@ tracks/0/path = NodePath("Control/ColorRect:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.63),
+"times": PackedFloat32Array(0, 1.1666666),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0.17254902, 0, 0.17254902, 0), Color(0.17091778, 2.0581912e-05, 0.17095676, 1)]
@@ -19,6 +20,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_oobaa"]
 resource_name = "FadeOut"
+length = 1.1667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -26,7 +28,7 @@ tracks/0/path = NodePath("Control/ColorRect:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.54),
+"times": PackedFloat32Array(0, 1.1333333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0.17254902, 0, 0.17254902, 1), Color(0.17254902, 0, 0.17254902, 0)]

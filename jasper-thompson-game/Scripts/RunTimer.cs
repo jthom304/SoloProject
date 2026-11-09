@@ -1,3 +1,15 @@
+/*******************************************************************/
+/*Filename: RunTimer.cs
+/ * Author: Jasper Thompson
+/ * Major: Game Dev/ Animation
+/ * Date Created: 10/10/26
+/ * Last Modified: 11/08/26
+/ * Due Date: 10/28/26
+/ * Course: Cpsc 320
+/ * Professor Name: Prof. Jacklitsch
+/ * Assignment: Project One - Solo Project
+/ * Purpose: Handle game timer countdown
+/*******************************************************************/
 using Godot;
 using System;
 

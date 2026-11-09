@@ -1,3 +1,15 @@
+/*******************************************************************/
+/*Filename: AudioManager.cs
+/ * Author: Jasper Thompson
+/ * Major: Game Dev/ Animation
+/ * Date Created: 10/15/26
+/ * Last Modified: 10/15/26
+/ * Due Date: 10/28/26
+/ * Course: Cpsc 320
+/ * Professor Name: Prof. Jacklitsch
+/ * Assignment: Project One - Solo Project
+/ * Purpose: Handle audio switchin
+/*******************************************************************/
 using Godot;
 using System;
 
@@ -58,7 +70,7 @@ public partial class AudioManager : Node
     public void UpdateVolume(double newVolume)
     {
         GlobalVariables.GameVolume = (float)newVolume;
-
+        GD.Print("AudioManager Volume: " + GlobalVariables.GameVolume);
         float volumeDb;
         if(newVolume <= 0)//decibel control
         {

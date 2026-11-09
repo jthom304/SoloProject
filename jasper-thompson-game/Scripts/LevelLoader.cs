@@ -1,3 +1,15 @@
+/*******************************************************************/
+/*Filename: LevelLoader.cs
+/ * Author: Jasper Thompson
+/ * Major: Game Dev/ Animation
+/ * Date Created: 10/10/26
+/ * Last Modified: 11/08/26
+/ * Due Date: 10/28/26
+/ * Course: Cpsc 320
+/ * Professor Name: Prof. Jacklitsch
+/ * Assignment: Project One - Solo Project
+/ * Purpose: Find and change scenes
+/*******************************************************************/
 using Godot;
 using System;
 
@@ -109,6 +121,7 @@ public partial class LevelLoader : Node
         //what scenes can pause 
         bool CanPause = packedScene.ResourcePath == StartLevelScene || packedScene.ResourcePath == GameLevelScene;
         _pauseMenu.Visible = false;
+        _pauseMenu.ProcessMode = ProcessModeEnum.Pausable;
         _pauseMenu.SetProcess(CanPause);
 
 
