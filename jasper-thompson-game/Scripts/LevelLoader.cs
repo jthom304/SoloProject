@@ -2,7 +2,7 @@
 /*Filename: LevelLoader.cs
 / * Author: Jasper Thompson
 / * Major: Game Dev/ Animation
-/ * Date Created: 10/10/26
+/ * Date Created: 10/21/26
 / * Last Modified: 11/08/26
 / * Due Date: 10/28/26
 / * Course: Cpsc 320
@@ -41,8 +41,8 @@ public partial class LevelLoader : Node
     private PauseMenu _pauseMenu;
 
     //currernt scene shown
-    private Node CurrentScene;
-    private Node sceneContainer;
+    private Node _currentScene;
+    private Node _sceneContainer;
 
     public static LevelLoader Instance { get; private set; }
 
@@ -50,12 +50,24 @@ public partial class LevelLoader : Node
 
     private LoadManager _loadManager;
 
+    /*
+    Name: _EnterTree
+    Description: set this instance
+    Parameters: None
+    Returns: None
+    */
     public override void _EnterTree()
     {
         //set instance
         Instance = this;
     }
 
+    /*
+    Name: _Ready
+    Description: set up references and gets inital scene
+    Parameters: None
+    Returns: None
+    */
     public override void _Ready()
     {
         //Find Parent
@@ -68,39 +80,45 @@ public partial class LevelLoader : Node
         _loadManager = gameScene.GetNode<LoadManager>("LoadManager");
 
         //scene container
-        sceneContainer = GetNode("CurrentScene");
-
-        if (GameManagerRef == null || _loadManager == null || sceneContainer == null)
-        {
-            GD.PrintErr("Game, Load, or scene container not found");
-            return;
-        }
-
-        if (sceneContainer.GetChildCount() > 0)
-        {
-            CurrentScene = sceneContainer.GetChild(0);
-            GD.Print("Initial scene registered: " + CurrentScene.Name);
-        }
+        _sceneContainer = GetNode("CurrentScene");
 
         //listen for completion
         _loadManager.LoadedLevel += OnLevelLoaded;
 
+        //get intial scene
+        if (_sceneContainer.GetChildCount() > 0)
+        {
+            _currentScene = _sceneContainer.GetChild(0);
+        }
+
     }
 
+     /*
+     Name: SwitchScene
+     Description: calls load for next scene
+     Parameters: string scenePath
+     Returns: None
+     */
     public void SwitchScene(string scenePath)
     {
         _loadManager.BeginLoadProcess(scenePath);
     }
 
+    /*
+    Name: OnLevelLoaded
+    Description: gets new scene, changes music, sets up pause menu,
+    removes previous scene, loads new scene, sets up player, enemy and camera,
+    updates current scene
+    Parameters: resource LevelLoaded
+    Returns: None
+    */
     private void OnLevelLoaded(Resource LevelLoaded)
     {
-        GD.Print("LL called");
         //what is next level
         PackedScene packedScene = LevelLoaded as PackedScene;
 
         if (packedScene == null)
         {
-            GD.Print("PackedScene == null");
             return;
         }
 
@@ -125,43 +143,29 @@ public partial class LevelLoader : Node
         _pauseMenu.SetProcess(CanPause);
 
 
-        if (CurrentScene != null)
+        if (_currentScene != null)
         {
+            //remove web count/counter
+            GameManagerRef.ClearCounter();
             //remove current scene
-            sceneContainer.RemoveChild(CurrentScene);
+            _sceneContainer.RemoveChild(_currentScene);
             //delete scene
-            CurrentScene.QueueFree();
+            _currentScene.QueueFree();
             //reset for bug catching
-            CurrentScene = null;
+            _currentScene = null;
         }
         Node newInstance = packedScene.Instantiate();
 
-        GD.Print("LoadingScene: " + packedScene.ResourcePath);
-        GD.Print("Scene B4 clidren: " + sceneContainer.GetChildCount());
         //add new scene
-        sceneContainer.AddChild(newInstance);
-        GD.Print("SceneChildrenAfter: " + sceneContainer.GetChildCount());
-        GD.Print("New Scene: " + newInstance.Name);
-        GD.Print("Lose Screen Type: " + newInstance.GetType().Name);
-        GD.Print("Lose Screen children: " + newInstance.GetChildCount());
+        _sceneContainer.AddChild(newInstance);
 
-        if (newInstance is CanvasItem item)
+        //register counter
+        WebCounter webCounter = newInstance.FindChild("WebCounter", true, false) as WebCounter;
+        if (webCounter != null)
         {
-            GD.Print("Lose screen visible: " + item.IsVisibleInTree());
-        }
-        else
-        {
-            GD.Print("New scene is not a CanvasItem");
-        }
-        Control control = newInstance as Control;
-
-        if (control != null)
-        {
-            GD.Print("Visible: " + control.IsVisibleInTree());
-        }
-
-
         //player and camera setup
+            GameManagerRef.FindCounter(webCounter);
+        }
         Node2D spawn = newInstance.FindChild("SpawnLocation", true, false) as Node2D;
         Node2D zone = newInstance.FindChild("CameraZone", true, false) as Node2D;
 
@@ -189,6 +193,6 @@ public partial class LevelLoader : Node
             }
         }
 
-        CurrentScene = newInstance;
+        _currentScene = newInstance;
     }
 }

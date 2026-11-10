@@ -2,13 +2,13 @@
 /*Filename: EnemyController.cs
 / * Author: Jasper Thompson
 / * Major: Game Dev/ Animation
-/ * Date Created: 11/08/26
-/ * Last Modified: 11/18/26
+/ * Date Created: 11/04/26
+/ * Last Modified: 11/08/26
 / * Due Date: 10/28/26
 / * Course: Cpsc 320
 / * Professor Name: Prof. Jacklitsch
 / * Assignment: Project One - Solo Project
-/ * Purpose: Handle player movement and commands
+/ * Purpose: Handle enemy movement and commands
 /*******************************************************************/
 using Godot;
 using System;
@@ -32,12 +32,19 @@ public partial class EnemyController : CharacterBody2D
 
     private float _stopTimer = 0f; //time left before enemy can move again
     private bool _isWaiting = false; //if enemy is waiting to speed up 
+    private bool _canMove = false; //permission to move sire?
 
 
     private bool _isTransitioning { get; set; } = false;
 
     private NavigationAgent2D _navAgent; //for nav region | taken 11/7/26 idea from https://forum.godotengine.org/t/how-do-i-make-the-enemy-follow-the-player-in-godot-4-3/83826/2
 
+    /*
+    Name: _Ready
+    Description: get nav agent and enemy speed
+    Parameters: None
+    Returns: None
+    */
     public override void _Ready()
     {
         _navAgent = GetNode<NavigationAgent2D>("NavigationAgent2D");
@@ -48,11 +55,34 @@ public partial class EnemyController : CharacterBody2D
         _currentSpeed = EnemySpeed;
     }
 
+    /*
+    Name: SetPlayer
+    Description: sets the player for enemy
+    Parameters: PlayerController newPlayer
+    Returns: None
+    */
     public void SetPlayer(PlayerController newPlayer)
     {
         _playerObject = newPlayer;
     }
 
+    /*
+    Name: StartChasing
+    Description: movement permission toggle
+    Parameters: None
+    Returns: None
+    */
+    public void StartChasing()
+    {
+        _canMove = true;
+    }
+
+    /*
+    Name: _PhysicsProcess
+    Description: checks for transition and enemy wait, calls handle movement, handles isWaiting
+    Parameters: double deltaTime
+    Returns: None
+    */
     public override void _PhysicsProcess(double deltaTime)
     {
         if (_isTransitioning)
@@ -75,8 +105,20 @@ public partial class EnemyController : CharacterBody2D
         }
     }
 
+    /*
+    Name: HandleMovement
+    Description: handles enemy movement controls
+    Parameters: None
+    Returns: None
+    */
     public void HandleMovenment()
     {
+        //no movement? (megamind ref)
+        if(!_canMove)
+        {
+            Velocity = Vector2.Zero;
+            return;
+        }
         if (_playerObject != null)
         {
             //inform enemy player location
@@ -90,7 +132,7 @@ public partial class EnemyController : CharacterBody2D
             MoveAndSlide();
         }
         //check collison
-        if (GetSlideCollisionCount() > 0)
+        if (GetSlideCollisionCount() > 0) //"how to check collison with collider" taken 11/7/26 https://forum.godotengine.org/t/get-last-slide-collision-and-get-slide-collision-count-only-detecting-once/40125
         {
             if (GetSlideCollision(0).GetCollider() == _playerObject)
             {
@@ -99,7 +141,12 @@ public partial class EnemyController : CharacterBody2D
         }
     }
 
-    //move enemy to new nav mesh
+    /*
+    Name: MoveToLevel
+    Description: move enemy to new nav mesh
+    Parameters: Vector2 spawnPosition, NavigationRegion2D navRegion
+    Returns: None
+    */
     public void MoveToLevel(Vector2 spawnPosition, NavigationRegion2D navRegion)
     {
         _isTransitioning = true;
@@ -114,7 +161,12 @@ public partial class EnemyController : CharacterBody2D
         _isTransitioning = false;
     }
 
-    //speeds up over time
+    /*
+    Name: SpeedUp
+    Description: speeds enemy up over time
+    Parameters: None
+    Returns: None
+    */
     public void SpeedUp()
     {
         //increase speed over time
@@ -123,12 +175,19 @@ public partial class EnemyController : CharacterBody2D
         _currentSpeed = Mathf.Min(_currentSpeed, BoostSpeed);
     }
 
-    //if hit by projectile will take hit to speed
+   /*
+   Name: SlowDown
+   Description: resets enemy speed and pauses for 2 seconds
+   Parameters: None
+   Returns: None
+   */
     public void SlowDown()
     {
+        //reset speed
         _previousSpeed = _currentSpeed;
         _currentSpeed = 0;
 
+        //freeze before moving again
         _stopTimer = 2f;
         _isWaiting = true;
     }

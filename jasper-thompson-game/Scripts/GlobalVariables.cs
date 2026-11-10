@@ -2,7 +2,7 @@
 /*Filename: GlobalVariables.cs
 / * Author: Jasper Thompson
 / * Major: Game Dev/ Animation
-/ * Date Created: 10/10/26
+/ * Date Created: 11/02/26
 / * Last Modified: 11/08/26
 / * Due Date: 10/28/26
 / * Course: Cpsc 320

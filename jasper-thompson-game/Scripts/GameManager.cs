@@ -2,13 +2,14 @@
 /*Filename: GameManager.cs
 / * Author: Jasper Thompson
 / * Major: Game Dev/ Animation
-/ * Date Created: 10/10/26
+/ * Date Created: 10/15/26
 / * Last Modified: 11/08/26
 / * Due Date: 10/28/26
 / * Course: Cpsc 320
 / * Professor Name: Prof. Jacklitsch
 / * Assignment: Project One - Solo Project
-/ * Purpose: Handle pause screen commands
+/ * Purpose: Manages player, enemy, and camera references, level transitions
+/ * and character positions, and the win condition
 /*******************************************************************/
 using Godot;
 using System;
@@ -25,7 +26,7 @@ public partial class GameManager : Node2D
     [Export]
     private RunTimer _runTimer;
 
-    //private Mapzone _activeZone;
+    private WebCounter _webCounter;
 
     private Node2D _spawnPoint;
 
@@ -52,6 +53,52 @@ public partial class GameManager : Node2D
         }
     }
 
+    /*
+    Name: FindCounter
+    Description: finds refernce for counter
+    Parameters: WebCounter counterObj
+    Returns: None
+    */
+    public void FindCounter(WebCounter counterObj)
+    {
+        _webCounter = counterObj;
+        if (PlayerRef != null)
+        {
+            _webCounter.UpdateCounter(PlayerRef.WebCount);
+        }
+    }
+
+    /*
+    Name: ClearCounter
+    Description: clear referenec when level removed
+    Parameters: None
+    Returns: None
+    */
+    public void ClearCounter()
+    {
+        _webCounter = null;
+    }
+
+    /*
+    Name: UpdateWebCounter
+    Description: updates web counter value
+    Parameters: int webAmount
+    Returns: None
+    */
+    public void UpdateWebCounter(int webAmount)
+    {
+        if (_webCounter != null)
+        {
+            _webCounter.UpdateCounter(webAmount);
+        }
+    }
+
+    /*
+    Name: FindPlayer
+    Description: find player in new level
+    Parameters: Node newLevel
+    Returns: None
+    */
     public void FindPlayer(Node newLevel)
     {
         if(PlayerRef != null && IsInstanceValid(PlayerRef))
@@ -66,10 +113,17 @@ public partial class GameManager : Node2D
             GD.Print("Player Not Found");
             return;
         }
+        PlayerRef.CrystalCollectedSignal += OnCrystalCollected;
         //move player outside of level as to not delete it in the load
         PlayerRef.Reparent(GetParent(), true);
     }
 
+    /*
+    Name: FindEnemy 
+    Description: find enemy in new level
+    Parameters: Node newLevel
+    Returns: None
+    */
     public void FindEnemy(Node newLevel)
     {
         if(EnemyRef != null && IsInstanceValid(EnemyRef))
@@ -85,18 +139,30 @@ public partial class GameManager : Node2D
             GD.Print("Enemy Not Found");
             return;
         }
-        GD.Print("Enemy Found");
+  
         //keep enemy alive during level change
         EnemyRef.Reparent(GetParent(), true);
         //Give enemy player reference
         EnemyRef.SetPlayer(PlayerRef);
     }
 
+    /*
+    Name: LoadNextLevel
+    Description: loads next level
+    Parameters: string scenePath
+    Returns: None
+    */
     public void LoadNextLevel(string scenePath)
     {
         LevelLoader.Instance.SwitchScene(scenePath);
     }
 
+    /*
+    Name: MovePlayer
+    Description: spawn player at spawn point in next level
+    Parameters: Node newLevel
+    Returns: None
+    */
     public async Task MovePlayer(Node newLevel)
     {
         Node2D spawnPoint = newLevel.FindChild("SpawnLocation", true, false) as Node2D;
@@ -118,6 +184,12 @@ public partial class GameManager : Node2D
         PlayerRef.IsTransitioning = false;
     }
 
+    /*
+    Name: MoveEnemy
+    Description: spawn enemy at spawn point in next level
+    Parameters: Node newLevel
+    Returns: None
+    */
     public void MoveEnemy(Node newLevel)
     {
         if (EnemyRef == null)
@@ -143,6 +215,12 @@ public partial class GameManager : Node2D
         EnemyRef.MoveToLevel(spawnPoint.GlobalPosition, navRegion);
     }
 
+    /*
+    Name: FindCamera
+    Description: find camera in new level
+    Parameters: Node newLevel
+    Returns: None
+    */
     public void FindCamera(Node newLevel)
     {
         CameraObj = newLevel.FindChild("Camera2D", true, false) as CameraController;
@@ -157,11 +235,34 @@ public partial class GameManager : Node2D
             GD.Print("Player null");
             return;
         }
+
+        //save camera
         CameraObj.Reparent(GetParent(), true);
+        //give target
         CameraObj.SetTarget(PlayerRef);
         CameraObj.MakeCurrent(); //makes sure this camera is active in viewport
     }
 
+    /*
+    Name: OnCrystalCollected
+    Description: if crystal collected is true enemy can start moving
+    Parameters: None
+    Returns: None
+    */
+    public void OnCrystalCollected()
+    {
+        if (EnemyRef != null)
+        {
+            EnemyRef.StartChasing();
+        }
+    }
+
+    /*
+    Name: SpeedUpEnemy
+    Description: calls to speed up enemy
+    Parameters: None
+    Returns: None
+    */
     public void SpeedUpEnemy()
     {
         if (EnemyRef != null)
@@ -170,11 +271,24 @@ public partial class GameManager : Node2D
         }
     }
 
+    /*
+    Name: KillPlayer
+    Description: if players dies call lose condition
+    Parameters: None
+    Returns: None
+    */
     public void KillPlayer()
     {
         LoseGame();
     }
 
+    //!! needed to add this because characters would show up after win/lose menu was called
+    /*
+    Name: RemoveCharacters
+    Description: makes sure charcters are not active 
+    Parameters: None
+    Returns: None
+    */
     public void RemoveCharacters()
     {
         if (CameraObj != null)
@@ -199,19 +313,29 @@ public partial class GameManager : Node2D
         EnemyRef = null;
     }
 
+    /*
+    Name: LoseGame
+    Description: removes characters, pauses tree, loads lose screen
+    Parameters: none
+    Returns: None
+    */
     public void LoseGame()
     {
         RemoveCharacters();
         GetTree().Paused = false;
         LevelLoader.Instance.SwitchScene(LevelLoader.Instance.LoseScreen);
-        GD.Print("lose menu displayed");
     }
-    
+
+    /*
+    Name: WinGame
+    Description: removes characters, pauses tree, loads win screen
+    Parameters: Nonel
+    Returns: None
+    */
     public void WinGame()
     {
         RemoveCharacters();
         GetTree().Paused = false;
         LevelLoader.Instance.SwitchScene(LevelLoader.Instance.WinScreen);
-        GD.Print("win menu displayed");
     }
 }

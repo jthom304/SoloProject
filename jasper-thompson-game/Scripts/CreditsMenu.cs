@@ -18,12 +18,24 @@ public partial class CreditsMenu : Control
     [Export]
     private TextureButton _backButton;
 
+    /*
+    Name: _Ready
+    Description: connect button signals
+    Parameters: None
+    Returns: None
+    */
     public override void _Ready()
     {
         _backButton.Pressed += BackPressed;
     }
 
-    //load menu
+    /*
+    Name: BackPressed
+    Description: loads menu scene
+    Parameters: None
+    Returns: None
+    */
+    //thought about it too hard shouldve made methods for all of the menu changes :(
     public void BackPressed()
     {
         LevelLoader.Instance.SwitchScene(LevelLoader.Instance.MenuScene);

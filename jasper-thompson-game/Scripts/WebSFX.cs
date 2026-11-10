@@ -2,8 +2,8 @@
 /*Filename: WebSFX.cs
 / * Author: Jasper Thompson
 / * Major: Game Dev/ Animation
-/ * Date Created: 10/15/26
-/ * Last Modified: 10/15/26
+/ * Date Created: 11/02/26
+/ * Last Modified: 11/02/26
 / * Due Date: 10/28/26
 / * Course: Cpsc 320
 / * Professor Name: Prof. Jacklitsch
@@ -15,6 +15,12 @@ using System;
 
 public partial class WebSFX : AudioStreamPlayer2D
 {
+    /*
+    Name: InitializeObject
+    Description: intializes sfx audio stream
+    Parameters: AudioStream desiredAudio, Vector2 audioPosition
+    Returns: None
+    */
     public void InitalizeObject(AudioStream desiredAudio, Vector2 audioPosition)
     {
         this.Stream = desiredAudio;
@@ -23,7 +29,13 @@ public partial class WebSFX : AudioStreamPlayer2D
 
         this.Finished += DeleteSound;
     }
-    
+
+    /*
+    Name: DeleteSound
+    Description: deletes audio stream 
+    Parameters: None
+    Returns: None
+    */
     public void DeleteSound()
     {
         this.QueueFree();

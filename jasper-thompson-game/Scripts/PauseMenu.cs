@@ -2,7 +2,7 @@
 /*Filename: PauseMenu.cs
 / * Author: Jasper Thompson
 / * Major: Game Dev/ Animation
-/ * Date Created: 10/10/26
+/ * Date Created: 10/31/26
 / * Last Modified: 11/08/26
 / * Due Date: 10/28/26
 / * Course: Cpsc 320
@@ -24,6 +24,12 @@ public partial class PauseMenu : Control
     [Export]
     private TextureButton _exitGame;
 
+    /*
+    Name: _Ready
+    Description: set up reference for slider and button signal
+    Parameters: None
+    Returns: None
+    */
     public override void _Ready()
     {
         ProcessMode = ProcessModeEnum.Pausable;
@@ -39,14 +45,25 @@ public partial class PauseMenu : Control
         _exitGame.Pressed += ExitPressed;
     }
 
-
+    /*
+    Name: VolumeChanged
+    Description: changes volume value
+    Parameters: float newVolume
+    Returns: None
+    */
+    //!!there is a slight issue with this
     private void VolumeChanged(float newVolume)
     {
-        //!!there is a slight issue with this
         //so it doesn't affect settings menu
         _volumeSlider.SetValueNoSignal(newVolume); // taken 11/08/26 https://docs.godotengine.org/en/4.5/classes/class_range.html#class-range-method-set-value-no-signal
     }
 
+     /*
+     Name: _ExitTree
+     Description: disconnects signal
+     Parameters: None
+     Returns: None
+     */
     public override void _ExitTree()
     {
         if (AudioManager.Instance != null)
@@ -55,6 +72,12 @@ public partial class PauseMenu : Control
         }
     }
 
+     /*
+     Name: _Process
+     Description: check for input action
+     Parameters: double delta
+     Returns: None
+     */
     public override void _Process(double delta)
     {
         if (Input.IsActionJustPressed("PauseGame"))
@@ -63,7 +86,12 @@ public partial class PauseMenu : Control
         }
     }
 
-    //toggle pause visibility
+    /*
+    Name: TogglePause
+    Description: shows menu when paused
+    Parameters: None
+    Returns: None
+    */
     public void TogglePause()
     {
         if (GetTree().Paused == false)
@@ -80,13 +108,23 @@ public partial class PauseMenu : Control
         }
     }
 
-    //call toglgle
+    /*
+    Name: ResumePressed
+    Description: calls TogglePause
+    Parameters: None
+    Returns: None
+    */
     private void ResumePressed()
     {
         TogglePause();
     }
 
-    //close program
+    /*
+    Name: ExitPressed
+    Description: close program
+    Parameters: None
+    Returns: None
+    */
     private void ExitPressed()
     {
         GetTree().Quit();

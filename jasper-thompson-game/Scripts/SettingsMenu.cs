@@ -2,7 +2,7 @@
 /*Filename: SettingsMenu.cs
 / * Author: Jasper Thompson
 / * Major: Game Dev/ Animation
-/ * Date Created: 10/10/26
+/ * Date Created: 10/31/26
 / * Last Modified: 11/08/26
 / * Due Date: 10/28/26
 / * Course: Cpsc 320
@@ -21,29 +21,14 @@ public partial class SettingsMenu : Control
     [Export]
     private TextureButton _backButton;
 
+    /*
+    Name: _Ready
+    Description: set up reference for slider and button signal
+    Parameters: None
+    Returns: None
+    */
     public override void _Ready()
     {
-        GD.Print("SettingsMenu loaded!");
-
-        if (_volumeSlider == null)
-        {
-            GD.PrintErr("Volume Slider is NULL!");
-            return;
-        }
-
-        if (_backButton == null)
-        {
-            GD.PrintErr("Back Button is NULL!");
-            return;
-        }
-
-        if (AudioManager.Instance == null)
-        {
-            GD.PrintErr("AudioManager Instance is NULL!");
-            return;
-        }
-
-        GD.Print("All references found!");
         if (AudioManager.Instance != null)
         {
             _volumeSlider.SetValueNoSignal(GlobalVariables.GameVolume);
@@ -53,12 +38,24 @@ public partial class SettingsMenu : Control
 
         _backButton.Pressed += BackPressed;
     }
-    
+
+    /*
+    Name: OnVolumeChanged
+    Description: intializes sfx audio stream
+    Parameters: float newVolume
+    Returns: None
+    */
     private void OnVolumeChanged(float newVolume)
     {
         _volumeSlider.SetValueNoSignal(newVolume);
     }
 
+    /*
+    Name: _ExitTree
+    Description: disconnect signal
+    Parameters: None
+    Returns: None
+    */
     public override void _ExitTree()
     {
         if (AudioManager.Instance != null)
@@ -67,6 +64,12 @@ public partial class SettingsMenu : Control
         }
     }
 
+    /*
+    Name: BackPressed
+    Description: loads menu scene
+    Parameters: none
+    Returns: None
+    */
     public void BackPressed()
     {
         LevelLoader.Instance.SwitchScene(LevelLoader.Instance.MenuScene);

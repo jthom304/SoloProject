@@ -2,7 +2,7 @@
 /* Filename: WebProjectile.cs */
 /* Author: Jasper Thompson */
 /* Major: Ani/ GameDev */
-/* Creation Date: October 19, 2026 */
+/* Creation Date: October 15, 2026 */
 /* Last Modified: October 19, 2026 */
 /* Due Date: October 28, 2026 */
 /* Course: CPSC320-010 */
@@ -18,10 +18,10 @@ public partial class WebProjectile : CharacterBody2D
     public Vector2 ProjectileVelocity { get; set; } //velocity for projectile
 
     /*
-        Name: InitializeObject
-        Description: initialize projectile 
-        Parameters: Vector2 spawnPosition - where it will spawn, Vector2 Velocity - speed var 
-        Returns: None
+    Name: InitializeObject
+    Description: initialize projectile 
+    Parameters: Vector2 spawnPosition - where it will spawn, Vector2 Velocity - speed var 
+    Returns: None
     */
     public static WebProjectile InitializeObject(Vector2 spawnPosition, Vector2 initialVelocity)
     {
@@ -39,10 +39,10 @@ public partial class WebProjectile : CharacterBody2D
     }
 
     /*
-        Name: _PhysicsProcess
-        Description: handles collision of projectiles
-        Parameters: double deltaTime
-        Returns: None
+    Name: _PhysicsProcess
+    Description: handles collision of projectiles
+    Parameters: double deltaTime
+    Returns: None
     */
     public override void _PhysicsProcess(double deltaTime)
     {

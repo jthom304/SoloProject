@@ -21,20 +21,35 @@ public partial class LoseScreen : Control
     [Export]
     private TextureButton _exitButton;
 
-    //on load in
+    /*
+    Name: _Ready
+    Description: connect button signals
+    Parameters: None
+    Returns: None
+    */
     public override void _Ready()
     {
         _menuButton.Pressed += MenuPressed;
         _exitButton.Pressed += ExitGame;
     }
 
-    //load menu
+    /*
+    Name: MenuPressed
+    Description: load menu screen
+    Parameters: None
+    Returns: None
+    */
     public void MenuPressed()
     {
         LevelLoader.Instance.SwitchScene(LevelLoader.Instance.MenuScene);
     }
 
-    //close program
+    /*
+    Name: ExitGame
+    Description: close program
+    Parameters: None
+    Returns: None
+    */
     public void ExitGame()
     {
         GetTree().Quit();

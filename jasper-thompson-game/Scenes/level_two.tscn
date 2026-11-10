@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bi5pmuuua8f87" path="res://Scenes/timer_hud.tscn" id="5_8jpcs"]
 [ext_resource type="TileSet" uid="uid://bxkml61ohkd25" path="res://Assets/Art/tileSet2.tres" id="5_gejx0"]
 [ext_resource type="Script" uid="uid://chx7pkrmdp563" path="res://Scripts/ZonePortal.cs" id="7_ye0dk"]
+[ext_resource type="PackedScene" uid="uid://d32n7m10gahu6" path="res://Scenes/web_counter.tscn" id="8_1amhj"]
 [ext_resource type="PackedScene" uid="uid://4q4fpagdr67y" path="res://Scenes/web_item.tscn" id="8_t1jg6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vmj7y"]
@@ -169,6 +170,10 @@ tile_set = ExtResource("3_8jpcs")
 [node name="Hud" type="CanvasLayer" parent="." unique_id=1640701177]
 
 [node name="TimerHUD" parent="Hud" unique_id=1868610215 instance=ExtResource("5_8jpcs")]
+
+[node name="WebCounter" parent="Hud" unique_id=110384699 instance=ExtResource("8_1amhj")]
+offset_top = 21.0
+offset_bottom = 21.0
 
 [node name="Portals" type="Node2D" parent="." unique_id=363131143]
 

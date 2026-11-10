@@ -22,6 +22,9 @@ public partial class PlayerController : CharacterBody2D
     [Signal]
     public delegate void StartedJumpEventHandler();
 
+    [Signal]
+    public delegate void CrystalCollectedSignalEventHandler();
+
     [Export]
     private AnimatedSprite2D _playerAnimator;
 
@@ -31,15 +34,20 @@ public partial class PlayerController : CharacterBody2D
     public const float WorldGravity = 5f; //gravity var
     public const float FallGravity = 7.5f; //fall gravity var 
     public float WebSpeed = 6;
-    private int WebCount = 0;
+    public int WebCount { get; private set; } = 0;
 
-    private bool CrystalCollected = false;
+    private bool _crystalCollected = false;
 
     public bool IsTransitioning { get; set; } = false;
 
-    private Area2D nearItem = null;
+    private Area2D _nearItem = null;
 
-
+    /*
+    Name: _Ready
+    Description: sets animator reference, and finds children for pickups
+    Parameters: None
+    Returns: None
+    */
     public override void _Ready()
     {
         _playerAnimator = GetNode<AnimatedSprite2D>("Sprite2D");
@@ -48,25 +56,23 @@ public partial class PlayerController : CharacterBody2D
     }
 
     /*
-     Name: _Process
-     Description: check for action to shoot projectile or pick up item
-     Parameters: doube delta
-     Returns: None
- */
+    Name: _Process
+    Description: check for action to shoot projectile or pick up item
+    Parameters: doube delta
+    Returns: None
+    */
     public override void _Process(double delta)
     {
-        GD.Print("player process running");
         if (Input.IsActionJustPressed("UseItem"))
         {
             UseItem();
         }
 
-        if (Input.IsActionJustPressed("PickUp") && nearItem != null)
+        if (Input.IsActionJustPressed("PickUp") && _nearItem != null)
         {
             GD.Print("Q pressed");
-            if (nearItem != null)
+            if (_nearItem != null)
             {
-                GD.Print("Item detected: ",  nearItem.Name);
                 PickUp();
             }
             else
@@ -79,11 +85,11 @@ public partial class PlayerController : CharacterBody2D
     }
 
     /*
-      Name: _PhysicsProcess
-      Description: call movement and rotation methods
-      Parameters: doube deltaTime
-      Returns: None
-  */
+    Name: _PhysicsProcess
+    Description: call movement and rotation methods
+    Parameters: doube deltaTime
+    Returns: None
+    */
     public override void _PhysicsProcess(double deltaTime)
     {
         if (IsTransitioning)
@@ -102,11 +108,11 @@ public partial class PlayerController : CharacterBody2D
     }
 
     /*
-       Name: HandleMovement
-       Description: handle movement of char
-       Parameters: doube deltaTime
-       Returns: None
-   */
+    Name: HandleMovement
+    Description: handle movement of char
+    Parameters: Vector2 movementVelocity
+    Returns: None
+    */
     private Vector2 HandleMovement(Vector2 movementVelocity)
     {
         movementVelocity.X = 0f;
@@ -131,11 +137,11 @@ public partial class PlayerController : CharacterBody2D
     }
 
     /*
-       Name: HandleJump
-       Description: handle jump event and send signal to animator
-       Parameters: doube deltaTime
-       Returns: None
-   */
+    Name: HandleJump
+    Description: handle jump event and send signal to animator
+    Parameters: Vector2 movementVelocity, double deltaTime
+    Returns: None
+    */
     private Vector2 HandleJump(Vector2 movementVelocity, double deltaTime)
     {
         if (IsOnFloor())
@@ -166,6 +172,12 @@ public partial class PlayerController : CharacterBody2D
         return movementVelocity;
     }
 
+    /*
+    Name: UpdateAnimation
+    Description: handles animation frames and calls animator
+    Parameters: None
+    Returns: None
+    */
     private void UpdateAnimation()
     {
         //dont change in load
@@ -189,7 +201,7 @@ public partial class PlayerController : CharacterBody2D
             {
                 _playerAnimator.Play("Idle");
             }
-            else if (CrystalCollected)
+            else if (_crystalCollected)
             {
                 _playerAnimator.Play("Run");
             }
@@ -200,7 +212,7 @@ public partial class PlayerController : CharacterBody2D
         }
         else if (!IsOnFloor())
         {
-            if (CrystalCollected)
+            if (_crystalCollected)
             {
                 _playerAnimator.Play("Jump");
             }
@@ -209,11 +221,11 @@ public partial class PlayerController : CharacterBody2D
     }
 
     /*
-       Name: UseItem
-       Description: handle spawn and movement of projectile
-       Parameters: doube deltaTime
-       Returns: None
-   */
+    Name: UseItem
+    Description: handle spawn and movement of projectile
+    Parameters: None
+    Returns: None
+    */
     private void UseItem()
     {
         if (WebCount > 0)
@@ -231,60 +243,66 @@ public partial class PlayerController : CharacterBody2D
             this.AddChild(newProjectile);
             //update count
             WebCount--;
-            //GD.Print("Shot1");
+            LevelLoader.Instance.GameManagerRef.UpdateWebCounter(WebCount);
         }
     }
 
+    /*
+    Name: FindPickups
+    Description: combs through tree for children nodes
+    Parameters: None
+    Returns: None
+    */
     public void FindPickups()
     {
-        GD.Print("Searching for pickups");
-
         foreach (Node childItems in GetTree().GetNodesInGroup("PickupItems")) //call node above playerchar
         {
             if (childItems is Area2D pickupArea)
             {
-                GD.Print("Connecting pickup: ", pickupArea.Name);
-                GD.Print("Is WebItem: ", pickupArea.IsInGroup("WebItem"));
-                GD.Print("Is CrystalItem: ", pickupArea.IsInGroup("CrystalItem"));
-                pickupArea.BodyEntered += (body) => //10/30/26 taken from
+                pickupArea.BodyEntered += (body) => //10/30/26 taken from https://docs.godotengine.org/en/stable/tutorials/scripting/c_sharp/c_sharp_signals.html
+                                                    //"how to handle a Godot signal without creating another method c# for checking body entered"
                 {
                     if (body == this)
                     {
-                        GD.Print("Player entered: ", pickupArea.Name);
-                        nearItem = pickupArea;
+                        _nearItem = pickupArea;
                     }
                 };
 
-                pickupArea.BodyExited += (body) => //taken from
+                pickupArea.BodyExited += (body) => 
                 {
-                    if (body == this && nearItem == pickupArea)
+                    if (body == this && _nearItem == pickupArea)
                     {
-                        nearItem = null;
+                        _nearItem = null;
                     }
                 };
-                GD.Print("Found Pickup: " + pickupArea.Name);
             }
         }
     }
 
+    /*
+    Name: PickUp
+    Description: Handles pick up input control
+    Parameters: None
+    Returns: None
+    */
     private void PickUp()
     {
-        if (nearItem == null)
+        if (_nearItem == null)
         {
-            GD.Print("Guess who doesnt have fucking arms bozo");
             return;
         }
 
-        if(nearItem.IsInGroup ("CrystalItem"))
+        if(_nearItem.IsInGroup ("CrystalItem"))
         {
-            CrystalCollected = true;
+            _crystalCollected = true;
+            EmitSignal(SignalName.CrystalCollectedSignal);
         }
-        else if (nearItem.IsInGroup("WebItem"))
+        else if (_nearItem.IsInGroup("WebItem"))
         {
             WebCount++;
-            GD.Print("Web grabbed, Total Count:" + WebCount);
+            LevelLoader.Instance.GameManagerRef.UpdateWebCounter(WebCount);
         }
-        nearItem.QueueFree();
-        nearItem = null;
+        _nearItem.QueueFree();
+        _nearItem = null;
     }
 }

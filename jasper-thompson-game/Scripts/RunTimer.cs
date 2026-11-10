@@ -2,7 +2,7 @@
 /*Filename: RunTimer.cs
 / * Author: Jasper Thompson
 / * Major: Game Dev/ Animation
-/ * Date Created: 10/10/26
+/ * Date Created: 10/15/26
 / * Last Modified: 11/08/26
 / * Due Date: 10/28/26
 / * Course: Cpsc 320
@@ -27,10 +27,10 @@ public partial class RunTimer : Control
     public float TimeLeft; //TimeLeft in timer countdown
 
     /*
-        Name: _Ready
-        Description: set time var and update TimeLeft, when key is pressed send signal
-        Parameters: None
-        Returns: None
+    Name: _Ready
+    Description: set time var and update TimeLeft, when key is pressed send signal
+    Parameters: None
+    Returns: None
     */
     public override void _Ready()
     {
@@ -54,10 +54,10 @@ public partial class RunTimer : Control
     }
 
     /*
-        Name: TimerDone
-        Description: When time is up check timer and stop it when it reaches 0
-        Parameters: None
-        Returns: None
+    Name: TimerDone
+    Description: When time is up check timer and stop it when it reaches 0
+    Parameters: None
+    Returns: None
     */
     private void TimerDone()
     {
@@ -68,7 +68,7 @@ public partial class RunTimer : Control
         _gameManager.CheckTimer(TimeLeft);
 
         //speed up enemy every 5 seconds 
-        if (TimeLeft % 5 == 0)
+        if (TimeLeft % 10 == 0)
         {
             _gameManager.SpeedUpEnemy();
         }
@@ -80,10 +80,10 @@ public partial class RunTimer : Control
     }
 
     /*
-        Name: UpdateTime
-        Description: Updates currentTime to HUD element
-        Parameters: float currentTime
-        Returns: None
+    Name: UpdateTime
+    Description: Updates currentTime to HUD element
+    Parameters: float currentTime
+    Returns: None
     */
     public void UpdateTime(float currentTime)
     {
