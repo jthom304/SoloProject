@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bi5pmuuua8f87"]
 
 [ext_resource type="Script" uid="uid://bioq5u66o0yqe" path="res://Scripts/RunTimer.cs" id="1_lvw3g"]
+[ext_resource type="FontFile" uid="uid://ctt8dbbodf75b" path="res://Assets/Fonts/PearSoda.ttf" id="2_s7w0h"]
 
 [node name="TimerHUD" type="Control" unique_id=1868610215 node_paths=PackedStringArray("_timeDisplay", "_timerObj")]
 layout_mode = 3
@@ -23,6 +24,8 @@ layout_mode = 2
 layout_mode = 0
 offset_right = 100.0
 offset_bottom = 50.0
+theme_override_fonts/font = ExtResource("2_s7w0h")
+theme_override_font_sizes/font_size = 27
 text = " Time: "
 horizontal_alignment = 1
 vertical_alignment = 1

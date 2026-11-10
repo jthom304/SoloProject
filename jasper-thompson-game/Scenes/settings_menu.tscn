@@ -66,7 +66,7 @@ theme_override_fonts/font = ExtResource("4_fe37x")
 theme_override_font_sizes/font_size = 17
 text = "How To PLay: 
 Move: <- 'A' 'D' -> Jump: SpaceBar
-Pause: esc PickUp: 'Q' UseItem: 'E'"
+Pause: esc PickUp: 'Q' UseItem: 'left mouse'"
 
 [node name="BackButton" type="TextureButton" parent="PanelContainer/TextureRect" unique_id=1147337195]
 layout_mode = 1

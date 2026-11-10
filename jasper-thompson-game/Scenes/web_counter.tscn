@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cdhrublym71py" path="res://Assets/Sprites/WebItem.png" id="1_40s24"]
 [ext_resource type="Script" uid="uid://b1jvddohuba" path="res://Scenes/WebCounter.cs" id="1_fyfyu"]
+[ext_resource type="FontFile" uid="uid://ctt8dbbodf75b" path="res://Assets/Fonts/PearSoda.ttf" id="3_v0im4"]
 
 [node name="WebCounter" type="Control" unique_id=110384699 node_paths=PackedStringArray("_webCountLabel")]
 layout_mode = 3
@@ -25,4 +26,6 @@ texture = ExtResource("1_40s24")
 
 [node name="Label" type="Label" parent="HBoxContainer" unique_id=1230821365]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_v0im4")
+theme_override_font_sizes/font_size = 25
 text = ":"
